@@ -19,7 +19,7 @@ namespace Game
             var inputGameController = new InputGameController(leftMoveDiff, rightMoveDiff, profilePlayer.CurrentCar);
             AddController(inputGameController);
 
-            var carController = new CarController();
+            var carController = new CarController(profilePlayer.Transport);
             AddController(carController);
         }
     }

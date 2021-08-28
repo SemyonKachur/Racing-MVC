@@ -7,6 +7,7 @@ internal class MainController : BaseController
 {
     private MainMenuController _mainMenuController;
     private GameController _gameController;
+    private SettingsController _setingsController;
     private readonly Transform _placeForUi;
     private readonly ProfilePlayer _profilePlayer;
 
@@ -33,14 +34,22 @@ internal class MainController : BaseController
             case GameState.Start:
                 _mainMenuController = new MainMenuController(_placeForUi, _profilePlayer);
                 _gameController?.Dispose();
+                _setingsController?.Dispose();
                 break;
             case GameState.Game:
                 _gameController = new GameController(_profilePlayer);
                 _mainMenuController?.Dispose();
+                _setingsController?.Dispose();
+                break;
+            case GameState.Settings:
+                _setingsController = new SettingsController(_placeForUi,_profilePlayer);
+                _mainMenuController?.Dispose();
+                _gameController?.Dispose();
                 break;
             default:
                 _mainMenuController?.Dispose();
                 _gameController?.Dispose();
+                _setingsController?.Dispose();
                 break;
         }
     }

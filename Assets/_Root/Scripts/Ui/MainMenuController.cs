@@ -11,12 +11,11 @@ namespace Ui
         private readonly ProfilePlayer _profilePlayer;
         private readonly MainMenuView _view;
 
-
         public MainMenuController(Transform placeForUi, ProfilePlayer profilePlayer)
         {
             _profilePlayer = profilePlayer;
             _view = LoadView(placeForUi);
-            _view.Init(StartGame);
+            _view.Init(StartGame,Settings);
         }
 
         private MainMenuView LoadView(Transform placeForUi)
@@ -27,8 +26,11 @@ namespace Ui
 
             return objectView.GetComponent<MainMenuView>();
         }
-
+       
         private void StartGame() =>
             _profilePlayer.CurrentState.Value = GameState.Game;
+
+        private void Settings() =>
+            _profilePlayer.CurrentState.Value = GameState.Settings;
     }
 }
