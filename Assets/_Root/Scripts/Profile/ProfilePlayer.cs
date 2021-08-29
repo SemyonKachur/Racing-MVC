@@ -1,6 +1,6 @@
 using Game.Car;
 using Tool;
-using static Profile.ProfilePlayerSO;
+using Configs;
 
 namespace Profile
 {
@@ -11,22 +11,17 @@ namespace Profile
         public readonly Transport Transport;
 
 
-        public ProfilePlayer(float speedCar, GameState initialState) : this(speedCar)
+        public ProfilePlayer(float speedCar, GameState initialState,Transport transport) : this(speedCar)
         {
             CurrentState.Value = initialState;
+            Transport = transport;
         }
-
+        
         public ProfilePlayer(float speedCar)
         {
             CurrentState = new SubscriptionProperty<GameState>();
             CurrentCar = new CarModel(speedCar);
         }
-        public ProfilePlayer (ProfilePlayerSO profileData)
-        {
-            CurrentState = new SubscriptionProperty<GameState>();
-            CurrentState.Value = profileData.gameState;
-            CurrentCar = profileData._car;
-            Transport = profileData.transport;
-        }
+        
     }
 }

@@ -24,6 +24,7 @@ internal class MainController : BaseController
     {
         _mainMenuController?.Dispose();
         _gameController?.Dispose();
+        _setingsController?.Dispose();
         _profilePlayer.CurrentState.UnSubscribeOnChange(OnChangeGameState);
     }
 

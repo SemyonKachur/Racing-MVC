@@ -10,6 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cfa302353e8a8b141b8414a43a53132c, type: 3}
-  m_Name: ProfilePlayerCar
+  m_Name: ProfilePlayer
   m_EditorClassIdentifier: 
   gameState: 2
+  transport: 0
+  speed: 15

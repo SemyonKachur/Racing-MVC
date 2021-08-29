@@ -1,3 +1,4 @@
+using Game.Boat;
 using Game.Car;
 using Game.InputLogic;
 using Game.TapeBackground;
@@ -19,8 +20,16 @@ namespace Game
             var inputGameController = new InputGameController(leftMoveDiff, rightMoveDiff, profilePlayer.CurrentCar);
             AddController(inputGameController);
 
-            var carController = new CarController(profilePlayer.Transport);
-            AddController(carController);
+            if (profilePlayer.Transport == Transport.Car)
+            {
+                var carController = new CarController();
+                AddController(carController);
+            }
+            else if (profilePlayer.Transport == Transport.Boat)
+            {
+                var boatController = new BoatController();
+                AddController(boatController);
+            }
         }
     }
 }

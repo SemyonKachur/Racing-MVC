@@ -1,5 +1,5 @@
 using UnityEngine;
-using Profile;
+using Configs;
 
 namespace Tool
 {
@@ -11,7 +11,7 @@ namespace Tool
         public static GameObject LoadPrefab(ResourcePath path) =>
             Resources.Load<GameObject>(path.PathResource);
 
-        public static ProfilePlayerSO LoadProfilePlayer(ResourcePath path) =>
-            Resources.Load<ProfilePlayerSO>(path.PathResource);
+        public static PlayerStatsConfig LoadPlayerStats(ResourcePath path) =>
+            Resources.Load<PlayerStatsConfig>(path.PathResource);
     }
 }
