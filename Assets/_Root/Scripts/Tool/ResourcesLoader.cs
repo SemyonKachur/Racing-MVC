@@ -1,5 +1,6 @@
 using UnityEngine;
 using Configs;
+using Services.Ads.UnityAds;
 
 namespace Tool
 {
@@ -13,5 +14,8 @@ namespace Tool
 
         public static PlayerStatsConfig LoadPlayerStats(ResourcePath path) =>
             Resources.Load<PlayerStatsConfig>(path.PathResource);
+
+        public static UnityAdsSettings LoadAdsSettings(ResourcePath path) =>
+            Resources.Load<UnityAdsSettings>(path.PathResource);
     }
 }

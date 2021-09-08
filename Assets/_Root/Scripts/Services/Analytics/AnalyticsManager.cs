@@ -1,18 +1,26 @@
-using UnityEngine;
 using Services.Analytics.UnityAnalytics;
+using UnityEngine;
 
 namespace Services.Analytics
 {
-    internal class AnalyticsManager : MonoBehaviour
+    internal class AnalyticsManager
     {
+        private static AnalyticsManager Analytics;
         private IAnalyticsService[] _services;
 
 
-        private void Awake()
+        public AnalyticsManager()
         {
+            Analytics = this;
             InitializeServices();
         }
 
+        public static AnalyticsManager GetAnalytics()
+        {
+            if (Analytics == null) Analytics = new AnalyticsManager();
+            return Analytics;
+        }
+    
         private void InitializeServices()
         {
             _services = new IAnalyticsService[]
@@ -20,7 +28,8 @@ namespace Services.Analytics
                 new UnityAnalyticsService()
             };
         }
-
+            
+        
         public void SendMainMenuOpened() =>
             SendEvent("MainMenuOpened");
 

@@ -1,26 +1,36 @@
+using Tool;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Advertisements;
 
 namespace Services.Ads.UnityAds
 {
-    internal class UnityAdsService : MonoBehaviour, IUnityAdsInitializationListener, IAdsService
+    internal class UnityAdsService : IUnityAdsInitializationListener, IAdsService
     {
         [Header("Components")]
-        [SerializeField] private UnityAdsSettings _settings;
+        public static UnityAdsService Service;
+        private UnityAdsSettings _settings;
+        private ResourcePath _resourcePath = new ResourcePath("ScriptableObjects/UnityAdsSettings");
 
-        [field: Header("Events")]
-        [field: SerializeField] public UnityEvent Initialized { get; private set; }
+        [field: Header("Events")] public UnityEvent Initialized { get;} = new UnityEvent();
 
         public IAdsPlayer InterstitialPlayer { get; private set; }
         public IAdsPlayer RewardedPlayer { get; private set; }
         public IAdsPlayer BannerPlayer { get; private set; }
 
 
-        private void Awake()
+        public UnityAdsService()
         {
+            Service = this;
+            _settings = ResourcesLoader.LoadAdsSettings(_resourcePath);
             InitializeAds();
             InitializePlayers();
+        }
+
+        public static UnityAdsService GetUnityAds()
+        {
+            if (Service == null) Service = new UnityAdsService();
+            return Service;
         }
 
         private void InitializeAds() =>

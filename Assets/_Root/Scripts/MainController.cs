@@ -1,6 +1,7 @@
 using Ui;
 using Game;
 using Profile;
+using Services.Ads.UnityAds;
 using UnityEngine;
 
 internal class MainController : BaseController
