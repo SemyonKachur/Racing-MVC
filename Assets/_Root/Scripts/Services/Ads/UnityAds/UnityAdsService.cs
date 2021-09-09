@@ -1,3 +1,4 @@
+using Services.Ads.UnityAds.Settings;
 using Tool;
 using UnityEngine;
 using UnityEngine.Events;
@@ -54,7 +55,9 @@ namespace Services.Ads.UnityAds
                 : (IAdsPlayer)new EmptyPlayer("");
 
         private IAdsPlayer CreateRewarded() =>
-            new EmptyPlayer("");
+            _settings.Rewarded.Enabled
+               ? new RewardedPlayer(_settings.Rewarded.Id) :
+                (IAdsPlayer) new EmptyPlayer("");
 
         private IAdsPlayer CreateBanner() =>
             new EmptyPlayer("");

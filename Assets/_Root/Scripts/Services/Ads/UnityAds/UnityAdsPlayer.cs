@@ -24,6 +24,7 @@ namespace Services.Ads.UnityAds
             Load();
             OnPlaying();
             Load();
+            Debug.Log("Playing complete");
         }
 
         protected abstract void OnPlaying();

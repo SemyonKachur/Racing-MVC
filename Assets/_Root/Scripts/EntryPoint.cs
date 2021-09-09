@@ -2,8 +2,10 @@ using Configs;
 using Profile;
 using Services.Ads.UnityAds;
 using Services.Analytics;
+using Services.IAP;
 using Tool;
 using UnityEngine;
+using UnityEngine.Purchasing;
 
 internal class EntryPoint : MonoBehaviour
 {
@@ -14,6 +16,8 @@ internal class EntryPoint : MonoBehaviour
     private MainController _mainController;
     private AnalyticsManager _analytics;
     private UnityAdsService _ads;
+    private IAPService _iapService;
+
 
     private void Awake()
     {
@@ -23,12 +27,16 @@ internal class EntryPoint : MonoBehaviour
         _analytics = new AnalyticsManager();
         _analytics.SendMainMenuOpened();
         _ads = new UnityAdsService();
-        _ads.Initialized.AddListener(_ads.InterstitialPlayer.Play);
+        _ads.Initialized.AddListener(OnAdsInitialized);
+        _iapService = IAPService.GetIAPService();
+
     }
 
     protected void OnDestroy()
     {
         _mainController.Dispose();
-        _ads.Initialized.RemoveListener(_ads.InterstitialPlayer.Play);
+        _ads.Initialized.RemoveListener(OnAdsInitialized);
     }
+    
+    private void OnAdsInitialized() => _ads.InterstitialPlayer.Play();
 }

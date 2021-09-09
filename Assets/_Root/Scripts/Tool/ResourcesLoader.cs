@@ -1,6 +1,7 @@
 using UnityEngine;
 using Configs;
 using Services.Ads.UnityAds;
+using Services.IAP;
 
 namespace Tool
 {
@@ -17,5 +18,8 @@ namespace Tool
 
         public static UnityAdsSettings LoadAdsSettings(ResourcePath path) =>
             Resources.Load<UnityAdsSettings>(path.PathResource);
+        public static ProductLibrary LoadProductLibrary(ResourcePath path) =>
+            Resources.Load<ProductLibrary>(path.PathResource);
+        
     }
 }
