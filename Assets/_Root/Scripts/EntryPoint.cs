@@ -26,10 +26,11 @@ internal class EntryPoint : MonoBehaviour
         _mainController = new MainController(_placeForUi, profilePlayer);
         _analytics = new AnalyticsManager();
         _analytics.SendMainMenuOpened();
+        
         _ads = new UnityAdsService();
         _ads.Initialized.AddListener(OnAdsInitialized);
+        
         _iapService = IAPService.GetIAPService();
-
     }
 
     protected void OnDestroy()

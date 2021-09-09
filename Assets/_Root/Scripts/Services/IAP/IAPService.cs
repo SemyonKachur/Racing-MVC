@@ -2,6 +2,7 @@ using Tool;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Purchasing;
+using UnityEngine.Analytics;
 
 namespace Services.IAP
 {
@@ -79,6 +80,7 @@ namespace Services.IAP
 
             _controller.InitiatePurchase(id);
             Log("Buying sucsess");
+            UnityEngine.Analytics.Analytics.Transaction(id, 1, "RUR");
         }
 
         public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs args)
