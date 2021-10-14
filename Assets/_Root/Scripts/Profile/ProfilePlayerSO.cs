@@ -13,9 +13,9 @@ namespace Profile
             boat
         }
 
-        [SerializeField] internal GameState gameState = GameState.Start;
-        [SerializeField] public readonly Transport transport = Transport.boat;
-        [SerializeField] static float CarSpeed = 15.0f;
+        [field: SerializeField] public  GameState gameState { get; private set; } = GameState.Start;
+        [field: SerializeField] public Transport transport { get; private set; } = Transport.boat;
+        [field: SerializeField] public static float CarSpeed { get; private set; } = 15.0f;
         internal CarModel _car = new CarModel(CarSpeed);            
 
     }
