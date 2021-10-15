@@ -5,12 +5,17 @@ namespace Game.InputLogic
 {
     internal class InputSwipes : BaseInputView
     {
-        public Vector2 startPos;
-        public Vector2 direction;
-        public bool directionChosen;
-        
-        private void Start() =>
+        private Vector2 startPos;
+        private Vector2 direction;
+        private bool directionChosen;
+        private TrailRenderer _trail;
+
+        private void Start()
+        {
             UpdateManager.SubscribeToUpdate(Move);
+            _trail = GetComponent<TrailRenderer>();
+        }
+
         private void OnDestroy() =>
             UpdateManager.UnsubscribeFromUpdate(Move);
         
@@ -20,7 +25,8 @@ namespace Game.InputLogic
             if (Input.touchCount > 0)
             {
                 Touch touch = Input.GetTouch(0);
-
+                _trail.gameObject.transform.position = Camera.main.ScreenToWorldPoint(touch.position);
+                
                 switch (touch.phase)
                 {
                     case TouchPhase.Began:
