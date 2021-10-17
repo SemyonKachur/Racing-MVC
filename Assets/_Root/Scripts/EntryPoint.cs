@@ -12,7 +12,7 @@ internal class EntryPoint : MonoBehaviour
     [SerializeField] private Transform _placeForUi;
 
     private readonly ResourcePath _resourcePath = new ResourcePath("ScriptableObjects/ProfilePlayer");
-    private PlayerStatsConfig _playerStats;
+    [SerializeField] PlayerStatsConfig _playerStats;
     private MainController _mainController;
     private AnalyticsManager _analytics;
     private UnityAdsService _ads;
@@ -21,7 +21,7 @@ internal class EntryPoint : MonoBehaviour
 
     private void Awake()
     {
-        _playerStats = ResourcesLoader.LoadPlayerStats(_resourcePath);
+        // _playerStats = UnityEngine.Resources.Load<PlayerStatsConfig>("ProfilePlayer");
         var profilePlayer = new ProfilePlayer(_playerStats.Speed,_playerStats.GameState,_playerStats.Transport);
         _mainController = new MainController(_placeForUi, profilePlayer);
         _analytics = new AnalyticsManager();
