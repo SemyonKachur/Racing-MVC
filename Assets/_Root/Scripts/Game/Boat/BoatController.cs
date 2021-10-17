@@ -1,26 +1,26 @@
-using Tool;
+﻿using Tool;
 using UnityEngine;
 
-namespace Game.Car
+namespace Game.Boat
 {
-    internal class CarController : BaseController
+    internal class BoatController : BaseController
     {
-        private readonly ResourcePath _viewPath = new ResourcePath("Prefabs/Car");
-        private readonly CarView _view;
+        private readonly ResourcePath _viewPath = new ResourcePath("Prefabs/Boat");
+        private readonly BoatView _view;
 
         public GameObject ViewGameObject => _view.gameObject;
 
-        public CarController()
+        public BoatController()
         {
             _view = LoadView();
         }
-        private CarView LoadView()
+        private BoatView LoadView()
         {
             GameObject prefab = ResourcesLoader.LoadPrefab(_viewPath);
             GameObject objectView = Object.Instantiate(prefab);
             AddGameObject(objectView);
 
-            return objectView.GetComponent<CarView>();
+            return objectView.GetComponent<BoatView>();
         }
     }
 }

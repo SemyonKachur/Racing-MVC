@@ -1,6 +1,7 @@
 using Ui;
 using Game;
 using Profile;
+using Services.Ads.UnityAds;
 using UnityEngine;
 
 internal class MainController : BaseController
@@ -24,6 +25,7 @@ internal class MainController : BaseController
     {
         _mainMenuController?.Dispose();
         _gameController?.Dispose();
+        _setingsController?.Dispose();
         _profilePlayer.CurrentState.UnSubscribeOnChange(OnChangeGameState);
     }
 
