@@ -23,12 +23,12 @@ namespace Game
             var inputGameController = new InputGameController(leftMoveDiff, rightMoveDiff, profilePlayer.CurrentCar);
             AddController(inputGameController);
 
-            if (profilePlayer.Transport == Transport.Car)
+            if (profilePlayer.Transport == Profile.Transport.Car)
             {
                 var carController = new CarController();
                 AddController(carController);
             }
-            else if (profilePlayer.Transport == Transport.Boat)
+            else if (profilePlayer.Transport == Profile.Transport.Boat)
             {
                 var boatController = new BoatController();
                 AddController(boatController);

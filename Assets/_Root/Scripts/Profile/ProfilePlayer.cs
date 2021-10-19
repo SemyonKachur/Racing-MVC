@@ -1,4 +1,5 @@
 using Game.Car;
+using Inventory;
 using Tool;
 using UnityEngine;
 
@@ -9,6 +10,7 @@ namespace Profile
         [field: SerializeField] public SubscriptionProperty<GameState> CurrentState;
         [field: SerializeField] public CarModel CurrentCar;
         [field: SerializeField] public Transport Transport;
+        [field: SerializeField] public InventoryModel Inventory;
         [field: SerializeField] public int Gold;
         [field: SerializeField] public int Oil;
 
@@ -17,6 +19,7 @@ namespace Profile
         {
             CurrentState.Value = initialState;
             Transport = transport;
+            Inventory = new InventoryModel();
             Gold = gold;
             Oil = oil;
         }
