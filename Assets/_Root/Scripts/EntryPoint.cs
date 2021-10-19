@@ -12,7 +12,7 @@ internal class EntryPoint : MonoBehaviour
     [SerializeField] private Transform _placeForUi;
 
     private readonly ResourcePath _resourcePath = new ResourcePath("ScriptableObjects/ProfilePlayer");
-    [SerializeField] PlayerStatsConfig _playerStats;
+    private PlayerStatsConfig _playerStats;
     private MainController _mainController;
     private AnalyticsManager _analytics;
     private UnityAdsService _ads;
@@ -21,14 +21,14 @@ internal class EntryPoint : MonoBehaviour
 
     private void Awake()
     {
-        // _playerStats = UnityEngine.Resources.Load<PlayerStatsConfig>("ProfilePlayer");
-        var profilePlayer = new ProfilePlayer(_playerStats.Speed,_playerStats.GameState,_playerStats.Transport);
+        _playerStats = ResourcesLoader.LoadPlayerStats(_resourcePath);
+        var profilePlayer = new ProfilePlayer(_playerStats.Speed,_playerStats.GameState,_playerStats.Transport, _playerStats.Gold,_playerStats.Oil);
         _mainController = new MainController(_placeForUi, profilePlayer);
         _analytics = new AnalyticsManager();
         _analytics.SendMainMenuOpened();
         
         _ads = new UnityAdsService();
-        _ads.Initialized.AddListener(OnAdsInitialized);
+        _ads.Initialized.AddListener(_ads.InterstitialPlayer.Play);
         
         _iapService = IAPService.GetIAPService();
     }
@@ -36,8 +36,6 @@ internal class EntryPoint : MonoBehaviour
     protected void OnDestroy()
     {
         _mainController.Dispose();
-        _ads.Initialized.RemoveListener(OnAdsInitialized);
+        _ads.Initialized.RemoveListener(_ads.InterstitialPlayer.Play);
     }
-    
-    private void OnAdsInitialized() => _ads.InterstitialPlayer.Play();
 }

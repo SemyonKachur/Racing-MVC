@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b97d832a08426b044864e445b54a898a, type: 3}
   m_Name: ProfilePlayer
   m_EditorClassIdentifier: 
-  gameState: 2
-  transport: 1
-  speed: 15
+  GameState: 2
+  Transport: 1
+  Speed: 15
+  Gold: 0
+  Oil: 0

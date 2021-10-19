@@ -6,21 +6,28 @@ namespace Ui
 {
     public class MainMenuView : MonoBehaviour
     {
-        [SerializeField] private Button _buttonStart;
-        [SerializeField] private Button _buttonSettings;
-        [SerializeField] private Button _buttonRewardedAds;
-        [SerializeField] private Button _buttonForBuying;
+        [field:SerializeField] public Button ButtonStart;
+        [field:SerializeField] public Button ButtonSettings;
+        [field:SerializeField] public Button ButtonRewardedAds;
+        [field:SerializeField] public Button ButtonForBuyingGold;
+        [field:SerializeField] public Button ButtonForBuyingOil;
+        [field: SerializeField] public Text GoldCount;
+        [field: SerializeField] public Text OilCount;
 
 
-        public void Init(UnityAction startGame, UnityAction settings, UnityAction rewardedAds,UnityAction buyItem)
+        public void Init(UnityAction startGame, UnityAction settings, UnityAction rewardedAds,
+            UnityAction buyGold, UnityAction buyOil, int gold, int oil)
         {
-            _buttonStart.onClick.AddListener(startGame);
-            _buttonSettings.onClick.AddListener(settings);
-            _buttonRewardedAds.onClick.AddListener(rewardedAds);
-            _buttonForBuying.onClick.AddListener(buyItem);
-         }
+            ButtonStart.onClick.AddListener(startGame);
+            ButtonSettings.onClick.AddListener(settings);
+            ButtonRewardedAds.onClick.AddListener(rewardedAds);
+            ButtonForBuyingGold.onClick.AddListener(buyGold);
+            ButtonForBuyingOil.onClick.AddListener(buyOil);
+            GoldCount.text = gold.ToString();
+            OilCount.text = oil.ToString();
+        }
 
         public void OnDestroy() =>
-            _buttonStart.onClick.RemoveAllListeners();
+            ButtonStart.onClick.RemoveAllListeners();
     }
 }

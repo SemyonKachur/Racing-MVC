@@ -6,12 +6,10 @@ namespace Configs
     [CreateAssetMenu(fileName = "ProfilePlayer", menuName = "Data/ProfilePlayer")]
     internal class PlayerStatsConfig : ScriptableObject
     {
-        [SerializeField] private GameState gameState = GameState.Start;
-        [SerializeField] private Transport transport = Transport.Boat;
-        [SerializeField] private float speed = 15.0f;
-
-        public GameState GameState => gameState;
-        public Transport Transport => transport;
-        public float Speed => speed;
+        [field: SerializeField] public GameState GameState = GameState.Start;
+        [field: SerializeField] public Transport Transport = Transport.Boat;
+        [field: SerializeField] public float Speed = 15.0f;
+        [field: SerializeField] public int Gold = 0;
+        [field: SerializeField] public int Oil = 0;
     }
 }
