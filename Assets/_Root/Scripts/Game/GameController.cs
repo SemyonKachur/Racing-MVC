@@ -20,15 +20,15 @@ namespace Game
             var tapeBackgroundController = new TapeBackgroundController(leftMoveDiff, rightMoveDiff);
             AddController(tapeBackgroundController);
 
-            var inputGameController = new InputGameController(leftMoveDiff, rightMoveDiff, profilePlayer.CurrentCar);
+            var inputGameController = new InputGameController(leftMoveDiff, rightMoveDiff, profilePlayer.CurrentTransport);
             AddController(inputGameController);
 
-            if (profilePlayer.Transport == Profile.Transport.Car)
+            if (profilePlayer.CurrentTransport.Type == TransportType.Car)
             {
                 var carController = new CarController();
                 AddController(carController);
             }
-            else if (profilePlayer.Transport == Profile.Transport.Boat)
+            else if (profilePlayer.CurrentTransport.Type == TransportType.Boat)
             {
                 var boatController = new BoatController();
                 AddController(boatController);

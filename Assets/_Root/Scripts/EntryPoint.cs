@@ -30,7 +30,7 @@ internal class EntryPoint : MonoBehaviour
     private void Awake()
     {
         _playerStats = ResourcesLoader.LoadPlayerStats(_resourcePath);
-        var profilePlayer = new ProfilePlayer(_playerStats.Speed,_playerStats.GameState,_playerStats.Transport, _playerStats.Gold,_playerStats.Oil);
+        var profilePlayer = new ProfilePlayer(_playerStats.TransportSpeed,_playerStats.TransportType,_playerStats.GameState, _playerStats.Gold,_playerStats.Oil);
         _mainController = new MainController(_placeForUi, profilePlayer);
         
         _analytics = new AnalyticsManager();

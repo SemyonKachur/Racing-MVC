@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 994e8951f562455381f08741a445afa7, type: 3}
-  m_Name: InventoryModelConfig
+  m_Script: {fileID: 11500000, guid: 53caa393ee77421da812d03f44eec0fc, type: 3}
+  m_Name: UpgradeItemConfigDataSource
   m_EditorClassIdentifier: 
-  _items:
-  - {fileID: 11400000, guid: d5a4ee00fcf9442579af2a585b0aed11, type: 2}
-  - {fileID: 11400000, guid: 66206fd087b04469a938970cde771d79, type: 2}
+  _itemConfigs:
+  - {fileID: 11400000, guid: 418bf3ca8e85b457baa346a080180357, type: 2}
+  - {fileID: 11400000, guid: 635aabf09f36f4f7bb73248332cc647c, type: 2}
