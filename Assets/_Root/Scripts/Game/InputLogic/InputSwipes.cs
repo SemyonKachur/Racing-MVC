@@ -21,7 +21,7 @@ namespace Game.InputLogic
         
         private void Move()
         {
-            var speed = 10 * Time.deltaTime;
+            var speed = (_speed/2) * Time.deltaTime;
             if (Input.touchCount > 0)
             {
                 Touch touch = Input.GetTouch(0);
@@ -49,14 +49,14 @@ namespace Game.InputLogic
                 {
                     if (direction.x > 0)
                     {
-                        speed *= 1.3f;
-                        OnRightMove(speed);
+                        speed = 1f;
+                        OnRightMove(speed * _speed);
                     }
                 }
                 else
                 {
-                        speed /= 5;
-                        OnRightMove(speed);
+                        speed = 0;
+                        OnRightMove(speed*_speed);
                 }
             }
             OnRightMove(speed);

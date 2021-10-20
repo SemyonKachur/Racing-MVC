@@ -1,6 +1,5 @@
 using Tool;
 using UnityEngine;
-using static Profile.ProfilePlayerSO;
 
 namespace Game.Car
 {
@@ -15,13 +14,6 @@ namespace Game.Car
         {
             _view = LoadView();
         }
-        public CarController(Transport transport)
-        {
-            if(transport == Transport.car) _viewPath = new ResourcePath("Prefabs/Car");
-            else _viewPath = new ResourcePath("Prefabs/Boat");
-            _view = LoadView();
-        }
-
         private CarView LoadView()
         {
             GameObject prefab = ResourcesLoader.LoadPrefab(_viewPath);

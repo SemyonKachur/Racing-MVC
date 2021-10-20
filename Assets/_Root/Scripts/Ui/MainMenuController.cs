@@ -1,4 +1,6 @@
 using Profile;
+using Services.Ads.UnityAds;
+using Services.IAP;
 using Tool;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -10,12 +12,16 @@ namespace Ui
         private readonly ResourcePath _resourcePath = new ResourcePath("Prefabs/mainMenu");
         private readonly ProfilePlayer _profilePlayer;
         private readonly MainMenuView _view;
+        private UnityAdsService _unityAds;
+        private IAPService _iapService;
 
         public MainMenuController(Transform placeForUi, ProfilePlayer profilePlayer)
         {
             _profilePlayer = profilePlayer;
+            _unityAds = UnityAdsService.GetUnityAds();
+            _iapService = IAPService.GetIAPService();
             _view = LoadView(placeForUi);
-            _view.Init(StartGame,Settings);
+            _view.Init(StartGame,Settings,Reward,BuyItem, BuyOil, profilePlayer.Gold, profilePlayer.Oil);
         }
 
         private MainMenuView LoadView(Transform placeForUi)
@@ -32,5 +38,21 @@ namespace Ui
 
         private void Settings() =>
             _profilePlayer.CurrentState.Value = GameState.Settings;
+
+        private void Reward() => _unityAds.RewardedPlayer.Play();
+
+        private void BuyItem()
+        {
+            _iapService.Buy("1"); 
+            _profilePlayer.AddGold(100);
+            _view.GoldCount.text = _profilePlayer.Gold.ToString();
+        } 
+
+        private void BuyOil()
+        {
+            _iapService.Buy("2");
+            _profilePlayer.AddOil(100);
+            _view.OilCount.text = _profilePlayer.Oil.ToString();
+        }
     }
 }
