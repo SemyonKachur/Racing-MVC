@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6b382e2b2d44494afa4547fc0c9e42c, type: 3}
   m_Name: TireUpgrade
   m_EditorClassIdentifier: 
-  <ItemConfig>k__BackingField: {fileID: 11400000, guid: fe18509e2fc42cf4597aa289d94d9372, type: 2}
+  <ItemConfig>k__BackingField: {fileID: 11400000, guid: d5a4ee00fcf9442579af2a585b0aed11, type: 2}
   <Type>k__BackingField: 1
   <Value>k__BackingField: 3

@@ -4,9 +4,5 @@ namespace Configs.Shed
     {
         None,
         Speed,
-        JumpHeight,
-        GunDamage,
-        Health,
-        
     }
 }

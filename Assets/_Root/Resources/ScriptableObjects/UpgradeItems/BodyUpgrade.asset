@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6b382e2b2d44494afa4547fc0c9e42c, type: 3}
   m_Name: BodyUpgrade
   m_EditorClassIdentifier: 
-  <ItemConfig>k__BackingField: {fileID: 11400000, guid: b5e2942bd9535b643991fd12251a0604, type: 2}
+  <ItemConfig>k__BackingField: {fileID: 11400000, guid: 66206fd087b04469a938970cde771d79, type: 2}
   <Type>k__BackingField: 1
   <Value>k__BackingField: 2
