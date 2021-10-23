@@ -2,12 +2,12 @@ using System.Collections.Generic;
 
 namespace Inventory
 {
-    internal class InventoryModel
+    internal class InventoryModel : IInventoryModel
     {
         private readonly List<IItem> _items = new List<IItem>();
-
-
+        
         public IReadOnlyList<IItem> GetEquippedItems() => _items;
+        public List<IItem> Items => _items;
 
         public void EquipItem(IItem item)
         {
