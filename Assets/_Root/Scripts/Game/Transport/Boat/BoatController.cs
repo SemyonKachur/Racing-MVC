@@ -1,9 +1,10 @@
-﻿using Tool;
+﻿using Features.Abilities;
+using Tool;
 using UnityEngine;
 
 namespace Game.Boat
 {
-    internal class BoatController : BaseController
+    internal class BoatController : BaseController, IAbilityActivator
     {
         private readonly ResourcePath _viewPath = new ResourcePath("Prefabs/Boat");
         private readonly BoatView _view;
@@ -21,6 +22,10 @@ namespace Game.Boat
             AddGameObject(objectView);
 
             return objectView.GetComponent<BoatView>();
+        }
+        public GameObject GetViewObject()
+        {
+            return ViewGameObject;
         }
     }
 }

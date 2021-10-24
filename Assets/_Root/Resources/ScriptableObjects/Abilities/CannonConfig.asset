@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f9948839a963445fb2a4712e28892f13, type: 3}
-  m_Name: Ability item
+  m_Name: CannonConfig
   m_EditorClassIdentifier: 
   itemConfig: {fileID: 11400000, guid: 7d269fea5737c4547840b0c65fde8dd6, type: 2}
-  view: {fileID: 0}
-  type: 0
-  value: 0
+  view: {fileID: 5187904050690865251, guid: 39eb2f21bbd4828409dd6ea55c2906b1, type: 3}
+  type: 1
+  value: 1000

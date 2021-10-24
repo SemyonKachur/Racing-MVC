@@ -1,9 +1,10 @@
+using Features.Abilities;
 using Tool;
 using UnityEngine;
 
 namespace Game.Car
 {
-    internal class CarController : BaseController
+    internal class CarController : BaseController, IAbilityActivator
     {
         private readonly ResourcePath _viewPath = new ResourcePath("Prefabs/Car");
         private readonly CarView _view;
@@ -21,6 +22,10 @@ namespace Game.Car
             AddGameObject(objectView);
 
             return objectView.GetComponent<CarView>();
+        }
+        public GameObject GetViewObject()
+        {
+            return ViewGameObject;
         }
     }
 }

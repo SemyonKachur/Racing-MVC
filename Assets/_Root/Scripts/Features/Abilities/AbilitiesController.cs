@@ -22,8 +22,15 @@ namespace Features.Abilities
             _abilityRepository = abilityRepository ?? throw new ArgumentNullException(nameof(abilityRepository));
             _abilityCollectionView =
                 abilityCollectionView ?? throw new ArgumentNullException(nameof(abilityCollectionView));
-            // _abilityCollectionView.Display(_inventoryModel.GetEquippedItems());
+            _abilityCollectionView.Display(_inventoryModel.GetEquippedItems());
         }
+        
+        private void OnAbilityUseRequested(object sender, IItem e)
+        {
+            if (_abilityRepository.AbilityMapByItemId.TryGetValue(e.Id, out var ability))
+                ability.Apply(_abilityActivator);
+        }
+
     }
 
 }
