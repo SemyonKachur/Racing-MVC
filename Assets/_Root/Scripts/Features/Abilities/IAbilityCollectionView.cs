@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using Inventory;
 
 namespace Features.Abilities
 {
     internal interface IAbilityCollectionView
     {
-        event EventHandler<IItem> UseRequested;
-        void Display(IReadOnlyList<IItem> abilityItems);
+        event EventHandler<IAbility> UseRequested;
+        void Display(IReadOnlyList<IAbility> abilityItems);
     }
 }

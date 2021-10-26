@@ -17,6 +17,7 @@ internal class EntryPoint : MonoBehaviour
     [SerializeField] PlayerStatsConfig _playerStats;
     [SerializeField] private InventoryModelConfig _inventoryModelConfig;
     [SerializeField] private UpgradeItemConfigDataSource _upgradeItemConfigDataSource;
+    [SerializeField] private AbilitiesModelConfig _abilitiesModelConfig;
     
     [Header("Cpmponents")]
     [SerializeField] private Transform _placeForUi;

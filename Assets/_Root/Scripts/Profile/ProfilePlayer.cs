@@ -1,3 +1,4 @@
+using Features.Abilities;
 using Game;
 using Game.Transport;
 using Inventory;
@@ -11,6 +12,7 @@ namespace Profile
         [field: SerializeField] public SubscriptionProperty<GameState> CurrentState;
         [field: SerializeField] public TransportModel CurrentTransport;
         [field: SerializeField] public InventoryModel Inventory;
+        [field: SerializeField] public AbilitiesModel Abilities;
         [field: SerializeField] public int Gold;
         [field: SerializeField] public int Oil;
 
@@ -20,6 +22,7 @@ namespace Profile
             CurrentState = new SubscriptionProperty<GameState>(initialState);;
             CurrentTransport = new TransportModel(transportSpeed, transportType);
             Inventory = new InventoryModel();
+            Abilities = new AbilitiesModel();
             Gold = gold;
             Oil = oil;
         }

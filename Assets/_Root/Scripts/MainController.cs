@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Configs.Shed;
+using Features.Abilities;
 using Ui;
 using Game;
 using Profile;
@@ -13,6 +14,7 @@ internal class MainController : BaseController
     private ShedController _shedController;
     private GameController _gameController;
     private SettingsController _setingsController;
+    private AbilitiesController _abilitiesController;
     
     private readonly Transform _placeForUi;
     private readonly ProfilePlayer _profilePlayer;
@@ -45,6 +47,10 @@ internal class MainController : BaseController
             case GameState.Game:
                 DisposeControllers();
                 _gameController = new GameController(_profilePlayer);
+                _abilitiesController = new AbilitiesController(_gameController._transport,
+                    _profilePlayer.Abilities,
+                    _profilePlayer.Abilities,
+                    _placeForUi);
                 break;
             case GameState.Settings:
                 DisposeControllers();
@@ -65,5 +71,6 @@ internal class MainController : BaseController
         _gameController?.Dispose();
         _setingsController?.Dispose();
         _shedController?.Dispose();
+        _abilitiesController?.Dispose();
     }
 }

@@ -11,4 +11,6 @@ public class AbilityItemConfig : ScriptableObject
     public AbilityType type;
     public float value;
     public int Id => itemConfig.Id;
+    public string Title { get; set; }
+    public Sprite Icon { get; set; }
 }

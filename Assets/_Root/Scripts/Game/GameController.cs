@@ -1,7 +1,9 @@
+using Features.Abilities;
 using Game.Boat;
 using Game.Car;
 using Game.InputLogic;
 using Game.TapeBackground;
+using Game.Transport;
 using Profile;
 using Services.Analytics;
 using Tool;
@@ -11,6 +13,7 @@ namespace Game
     internal class GameController : BaseController
     {
         private AnalyticsManager Analytics = AnalyticsManager.GetAnalytics();
+        public TransportController _transport { get; }
         public GameController(ProfilePlayer profilePlayer)
         {
            Analytics.GameStarted();
@@ -22,17 +25,8 @@ namespace Game
 
             var inputGameController = new InputGameController(leftMoveDiff, rightMoveDiff, profilePlayer.CurrentTransport);
             AddController(inputGameController);
-
-            if (profilePlayer.CurrentTransport.Type == TransportType.Car)
-            {
-                var carController = new CarController();
-                AddController(carController);
-            }
-            else if (profilePlayer.CurrentTransport.Type == TransportType.Boat)
-            {
-                var boatController = new BoatController();
-                AddController(boatController);
-            }
+            
+            _transport = new TransportController(profilePlayer.CurrentTransport.Type);
         }
     }
 }

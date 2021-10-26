@@ -1,3 +1,5 @@
+using Features.Abilities.Items;
+
 namespace Inventory
 {
     internal interface IItem

@@ -11,9 +11,12 @@ namespace Features.Abilities.Items
         private readonly Rigidbody2D _viewPrefab;
         private readonly ResourcePath viewPath = new ResourcePath("Prefabs/Abilities/Bomb");
         private readonly float _projectileSpeed;
+        
+        public int Id { get; }
+        public AbilityInfo Info { get; }
 
         public GunAbility(
-            [NotNull] string viewPath,
+            string viewPath,
             float projectileSpeed)
         {
             _viewPrefab = ResourcesLoader.LoadObject(this.viewPath);    

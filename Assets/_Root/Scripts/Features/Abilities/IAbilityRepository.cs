@@ -2,7 +2,7 @@
 
 namespace Features.Abilities
 {
-    public interface IAbilityRepository
+    internal interface IAbilityRepository
     {
         IReadOnlyDictionary<int, IAbility> AbilityMapByItemId { get; }   
     }

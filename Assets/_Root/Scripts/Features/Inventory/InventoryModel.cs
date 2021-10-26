@@ -25,8 +25,4 @@ namespace Inventory
             _items.Remove(item);
         }
     }
-
-    namespace Inventory
-    {
-    }
 }
