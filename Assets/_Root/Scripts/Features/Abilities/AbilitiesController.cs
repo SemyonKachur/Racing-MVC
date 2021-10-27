@@ -1,6 +1,4 @@
 ﻿using System;
-using Inventory;
-using JetBrains.Annotations;
 using Tool;
 using UnityEngine;
 
