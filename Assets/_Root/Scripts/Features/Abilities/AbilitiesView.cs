@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Inventory;
 using UnityEngine;
 
 namespace Features.Abilities
 {
-    internal class AbilitiesView : MonoBehaviour
+    internal class AbilitiesView : MonoBehaviour, IAbilityCollectionView
     {
         [SerializeField] private GameObject _itemViewPrefab;
         [SerializeField] private Transform _placeForItems;
@@ -37,9 +38,13 @@ namespace Features.Abilities
         {
             GameObject objectView = Instantiate(_itemViewPrefab, _placeForItems, false);
             AbilitiesView itemView = objectView.GetComponent<AbilitiesView>();
-            // itemView.Init(item);
-
             return itemView;
+        }
+
+        public event EventHandler<IAbility> UseRequested;
+        public void Display(IReadOnlyList<IAbility> abilityItems)
+        {
+            
         }
     }
 }

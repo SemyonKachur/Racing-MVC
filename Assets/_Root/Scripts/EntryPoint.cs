@@ -1,6 +1,7 @@
 using Configs;
 using Config;
 using Configs.Shed;
+using Features.Abilities;
 using Inventory;
 using Profile;
 using Services.Ads.UnityAds;
@@ -34,6 +35,7 @@ internal class EntryPoint : MonoBehaviour
         _playerStats = ResourcesLoader.LoadPlayerStats(_resourcePath);
         var profilePlayer = new ProfilePlayer(_playerStats.TransportSpeed,_playerStats.TransportType,_playerStats.GameState, _playerStats.Gold,_playerStats.Oil);
         InitializeInventoryModel(_inventoryModelConfig, profilePlayer.Inventory);
+        InitializeAbilitiesModel(_abilitiesModelConfig, profilePlayer.Abilities);
         _mainController = new MainController(_placeForUi, profilePlayer,_upgradeItemConfigDataSource.ItemConfigs);
         
         _analytics = new AnalyticsManager();
@@ -49,6 +51,12 @@ internal class EntryPoint : MonoBehaviour
     {
         var initializer = new InventoryInitializer(inventoryModelConfig);
         initializer.InitializeModel(inventoryModel);
+    }
+
+    private void InitializeAbilitiesModel(AbilitiesModelConfig abilitiesModelConfig, AbilitiesModel abilitiesModel)
+    {
+        var initializer = new AbilitiesInitializer(abilitiesModelConfig);
+        initializer.InitializeModel(abilitiesModel);
     }
 
     protected void OnDestroy()

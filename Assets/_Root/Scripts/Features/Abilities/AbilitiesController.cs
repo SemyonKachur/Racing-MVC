@@ -11,7 +11,6 @@ namespace Features.Abilities
         private readonly ResourcePath _viewPath = new ResourcePath("Prefabs/Abilities/AbilitiesView");
         private readonly IAbilitiesModel _abilitiesModel;
         private readonly IAbilityRepository _abilityRepository;
-        private readonly IAbilityCollectionView _abilityCollectionView;
         private readonly IAbilityActivator _abilityActivator;
         private readonly Transform _placeForUI;
         private readonly AbilitiesView _view;
@@ -30,8 +29,8 @@ namespace Features.Abilities
             _view = LoadView(_placeForUI);
             _view.Init(abilitiesModel.GetEquippedItems());
             
-            _abilityCollectionView.Display(abilitiesModel.GetEquippedItems());
-            _abilityCollectionView.UseRequested += OnAbilityUseRequested;
+            _view.Display(abilitiesModel.GetEquippedItems());
+            _view.UseRequested += OnAbilityUseRequested;
         }
         
         private void OnAbilityUseRequested(object sender, IAbility e)

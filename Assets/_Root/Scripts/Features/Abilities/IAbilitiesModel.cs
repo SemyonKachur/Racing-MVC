@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Inventory;
 
 namespace Features.Abilities
 {
@@ -8,5 +7,6 @@ namespace Features.Abilities
         public List<IAbility> Abilities { get; }
 
         public IReadOnlyList<IAbility> GetEquippedItems();
+        public void EquipItem(IAbility ability);
     }
 }
