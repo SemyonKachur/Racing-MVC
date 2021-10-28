@@ -1,11 +1,13 @@
-﻿namespace Features.Abilities.Items
+﻿using Inventory;
+
+namespace Features.Abilities.Items
 {
     internal class Ability : IAbility
     {
         public int Id { get; }
-        public AbilityInfo Info { get; private set; }
+        public ItemInfo Info { get; private set; }
         
-        public Ability(int id, AbilityInfo info)
+        public Ability(int id, ItemInfo info)
         {
             Id = id;
             Info = info;

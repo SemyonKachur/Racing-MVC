@@ -1,4 +1,5 @@
 ﻿using Features.Abilities.Items;
+using Inventory;
 
 namespace Features.Abilities
 {
@@ -6,13 +7,15 @@ namespace Features.Abilities
     {
         private readonly AbilitiesModelConfig _abilitiesModelConfig;
 
-        public AbilitiesInitializer(AbilitiesModelConfig abilitiesModelConfig) =>
+        public AbilitiesInitializer(AbilitiesModelConfig abilitiesModelConfig)
+        { 
             _abilitiesModelConfig = abilitiesModelConfig;
+        }
 
 
         public void InitializeModel(IAbilitiesModel abilitiesModel)
         {
-            foreach ( AbilityItemConfig abilityConfig in abilitiesModel.Abilities)
+            foreach ( AbilityItemConfig abilityConfig in _abilitiesModelConfig.AbilityList)
             {
                 var ability = CreateAbility(abilityConfig);
                 abilitiesModel.EquipItem(ability);
@@ -21,7 +24,7 @@ namespace Features.Abilities
 
         private IAbility CreateAbility(AbilityItemConfig abilityConfig)
         {
-            var itemInfo = new AbilityInfo(abilityConfig.Title, abilityConfig.Icon);
+            var itemInfo = new ItemInfo(abilityConfig.itemConfig.Title, abilityConfig.itemConfig.Icon);
             return new Ability(abilityConfig.Id, itemInfo);
         }
     }

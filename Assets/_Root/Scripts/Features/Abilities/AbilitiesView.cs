@@ -10,14 +10,14 @@ namespace Features.Abilities
         [SerializeField] private GameObject _itemViewPrefab;
         [SerializeField] private Transform _placeForItems;
 
-        private List<AbilitiesView> _abilitiesView;
-        
+        private List<ItemView> _abilitiesView;
+
         private void OnDestroy()
         {
             if (_abilitiesView == null)
                 return;
 
-            foreach (AbilitiesView abilitiesView in _abilitiesView)
+            foreach (ItemView abilitiesView in _abilitiesView)
                 Destroy(abilitiesView.gameObject);
 
             _abilitiesView.Clear();
@@ -26,25 +26,26 @@ namespace Features.Abilities
 
         public void Init(IReadOnlyList<IAbility> itemInfoCollection)
         {
-            _abilitiesView ??= new List<AbilitiesView>();
+            _abilitiesView ??= new List<ItemView>();
             foreach (IAbility item in itemInfoCollection)
             {
-                AbilitiesView itemView = CreateItemView(item);
+                ItemView itemView = CreateItemView(item);
                 _abilitiesView.Add(itemView);
             }
         }
 
-        private AbilitiesView CreateItemView(IAbility item)
+        private ItemView CreateItemView(IAbility item)
         {
             GameObject objectView = Instantiate(_itemViewPrefab, _placeForItems, false);
-            AbilitiesView itemView = objectView.GetComponent<AbilitiesView>();
-            return itemView;
+            ItemView abilityItem = objectView.gameObject.GetComponent<ItemView>();
+            abilityItem.Init(item);
+            return abilityItem;
         }
 
         public event EventHandler<IAbility> UseRequested;
         public void Display(IReadOnlyList<IAbility> abilityItems)
         {
-            
+            var ability = abilityItems;
         }
     }
 }

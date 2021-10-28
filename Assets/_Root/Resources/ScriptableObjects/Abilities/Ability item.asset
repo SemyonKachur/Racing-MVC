@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bed37c2e7e1641cfaa604d9d593ea73d, type: 3}
-  m_Name: Gun
+  m_Script: {fileID: 11500000, guid: f9948839a963445fb2a4712e28892f13, type: 3}
+  m_Name: Ability item
   m_EditorClassIdentifier: 
-  <Id>k__BackingField: 4
-  <Title>k__BackingField: LightGun
-  <Icon>k__BackingField: {fileID: 21300000, guid: 4af7b2d383b63494aabf4d874ab1f397, type: 3}
+  itemConfig: {fileID: 11400000, guid: a27b98d94e37e4f4aa7a20f503e0ab33, type: 2}
+  view: {fileID: 5668386525893257234, guid: 214394428339d9a4a998d06d551c3ae9, type: 3}
+  type: 1
+  value: 15000

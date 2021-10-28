@@ -1,4 +1,5 @@
 ﻿using System;
+using Inventory;
 using JetBrains.Annotations;
 using Tool;
 using UnityEngine;
@@ -13,7 +14,7 @@ namespace Features.Abilities.Items
         private readonly float _projectileSpeed;
         
         public int Id { get; }
-        public AbilityInfo Info { get; }
+        public ItemInfo Info { get; }
 
         public GunAbility(
             string viewPath,

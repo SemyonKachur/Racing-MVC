@@ -25,7 +25,7 @@ namespace Features.Abilities
             _placeForUI = placeForUI;
 
             _view = LoadView(_placeForUI);
-            _view.Init(abilitiesModel.GetEquippedItems());
+            _view.Init(abilitiesModel.GetEquippedItems()); // Нужно связать Items с префабами абилок
             
             _view.Display(abilitiesModel.GetEquippedItems());
             _view.UseRequested += OnAbilityUseRequested;

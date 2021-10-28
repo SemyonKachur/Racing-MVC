@@ -1,11 +1,9 @@
-﻿using Features.Abilities.Items;
+﻿using Inventory;
 
 namespace Features.Abilities
 {
-    internal interface IAbility
+    internal interface IAbility : IItem
     {
         void Apply(IAbilityActivator activator);
-        int Id { get; }
-        AbilityInfo Info { get; }
     }
 }

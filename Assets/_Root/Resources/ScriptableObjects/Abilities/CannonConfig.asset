@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: CannonConfig
   m_EditorClassIdentifier: 
   itemConfig: {fileID: 11400000, guid: 7d269fea5737c4547840b0c65fde8dd6, type: 2}
-  view: {fileID: 5187904050690865251, guid: 39eb2f21bbd4828409dd6ea55c2906b1, type: 3}
+  view: {fileID: 5668386525893257234, guid: 214394428339d9a4a998d06d551c3ae9, type: 3}
   type: 1
   value: 1000
