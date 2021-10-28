@@ -27,7 +27,7 @@ namespace Features.Abilities
 
         private IAbility CreateItem(AbilityItemConfig config)
         {
-            var abilityInfo = new ItemInfo(config.Title, config.Icon);
+            var abilityInfo = new ItemInfo(config.itemConfig.Title, config.itemConfig.Icon);
             return new Ability (config.Id, abilityInfo);
         }
         

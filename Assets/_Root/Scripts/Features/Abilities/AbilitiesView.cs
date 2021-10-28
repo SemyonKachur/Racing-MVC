@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Inventory;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Features.Abilities
 {
@@ -11,6 +12,7 @@ namespace Features.Abilities
         [SerializeField] private Transform _placeForItems;
 
         private List<ItemView> _abilitiesView;
+        public List<Button> _buttonView;
 
         private void OnDestroy()
         {
@@ -21,17 +23,6 @@ namespace Features.Abilities
                 Destroy(abilitiesView.gameObject);
 
             _abilitiesView.Clear();
-        }
-
-
-        public void Init(IReadOnlyList<IAbility> itemInfoCollection)
-        {
-            _abilitiesView ??= new List<ItemView>();
-            foreach (IAbility item in itemInfoCollection)
-            {
-                ItemView itemView = CreateItemView(item);
-                _abilitiesView.Add(itemView);
-            }
         }
 
         private ItemView CreateItemView(IAbility item)
@@ -45,7 +36,13 @@ namespace Features.Abilities
         public event EventHandler<IAbility> UseRequested;
         public void Display(IReadOnlyList<IAbility> abilityItems)
         {
-            var ability = abilityItems;
+            _abilitiesView ??= new List<ItemView>();
+            _buttonView ??= new List<Button>();
+            foreach (IAbility item in abilityItems)
+            {
+                ItemView itemView = CreateItemView(item);
+                _abilitiesView.Add(itemView);
+            }
         }
     }
 }
