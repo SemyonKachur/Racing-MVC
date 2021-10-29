@@ -1,3 +1,5 @@
+using System;
+using Features.Abilities;
 using Tool;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,6 +10,7 @@ namespace Inventory
     {
         [SerializeField] private Image _icon;
         [SerializeField] private CustomText _text;
+        public Action<IAbility> Action;
 
 
         public void Init(IItem item)

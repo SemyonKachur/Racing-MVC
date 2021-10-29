@@ -13,6 +13,7 @@ namespace Features.Abilities
 
         private List<ItemView> _abilitiesView;
         public List<Button> _buttonView;
+        public Action<IAbility> Action;
 
         private void OnDestroy()
         {
@@ -42,7 +43,13 @@ namespace Features.Abilities
             {
                 ItemView itemView = CreateItemView(item);
                 _abilitiesView.Add(itemView);
+                var button = itemView.GetComponent<Button>();
+                button.onClick.AddListener(()=>AbilityActionView(item));
             }
+        }
+        private void AbilityActionView(IAbility ability)
+        {
+            Action.Invoke(ability);
         }
     }
 }

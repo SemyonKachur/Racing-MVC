@@ -1,17 +1,18 @@
 ﻿using Features.Abilities;
+using Game.Transport;
 using Tool;
 using UnityEngine;
 
 namespace Game.Boat
 {
-    internal class BoatController : BaseController, IAbilityActivator
+    internal class BoatController : TransportController, IAbilityActivator
     {
         private readonly ResourcePath _viewPath = new ResourcePath("Prefabs/Boat");
         private readonly BoatView _view;
 
         public GameObject ViewGameObject => _view.gameObject;
 
-        public BoatController()
+        public BoatController() : base(TransportType.Boat)
         {
             _view = LoadView();
         }

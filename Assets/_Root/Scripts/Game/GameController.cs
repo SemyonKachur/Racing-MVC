@@ -14,9 +14,11 @@ namespace Game
     {
         private AnalyticsManager Analytics = AnalyticsManager.GetAnalytics();
         public TransportController _transport { get; }
+        private ProfilePlayer _profilePlayer;
         public GameController(ProfilePlayer profilePlayer)
         {
-           Analytics.GameStarted();
+            _profilePlayer = profilePlayer;
+            Analytics.GameStarted();
             var leftMoveDiff = new SubscriptionProperty<float>();
             var rightMoveDiff = new SubscriptionProperty<float>();
 
@@ -26,7 +28,26 @@ namespace Game
             var inputGameController = new InputGameController(leftMoveDiff, rightMoveDiff, profilePlayer.CurrentTransport);
             AddController(inputGameController);
             
-            _transport = new TransportController(profilePlayer.CurrentTransport.Type);
+            _transport = CreateController();
+        }
+
+        private TransportController CreateController()
+        {
+            TransportController transportController;
+            switch (_profilePlayer.CurrentTransport.Type)
+            {
+                case TransportType.Car:
+                    transportController = new CarController();
+                    break;
+                case TransportType.Boat:
+                    transportController = new BoatController();
+                    break;
+                default:
+                    transportController = new TransportController(TransportType.Car);
+                    break;
+            }
+            AddController(transportController);
+            return transportController;
         }
     }
 }

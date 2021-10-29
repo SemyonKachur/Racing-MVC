@@ -26,10 +26,13 @@ namespace Features.Abilities
 
             _view = LoadView(_placeForUI);
             _view.Display(abilitiesModel.GetEquippedItems());
-            
+            _view.Action += ViewAction;
+        }
+
+        private void ViewAction(IAbility ability)
+        {
             _view.UseRequested += OnAbilityUseRequested;
         }
-        
         private void OnAbilityUseRequested(object sender, IAbility e)
         {
             if (_abilityRepository.AbilityMapByItemId.TryGetValue(e.Id, out var ability))

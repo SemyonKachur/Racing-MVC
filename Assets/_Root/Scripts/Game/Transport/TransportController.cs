@@ -27,6 +27,7 @@ namespace Game.Transport
                 AddController(_boatController);
             }
         }
+
         public GameObject GetViewObject()
         {
             return _transportView;

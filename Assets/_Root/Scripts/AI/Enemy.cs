@@ -41,4 +41,13 @@ public class Enemy : IEnemy
             return power;
         }
     }
+
+    public int Crime
+    {
+        get
+        {
+            var crime = 5 -_powerPlayer + _moneyPlayer;
+            return crime;
+        }
+    }
 }

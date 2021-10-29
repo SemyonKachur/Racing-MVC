@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class FightWindowView : MonoBehaviour
 {
+    [Header("Player configs")]
     [SerializeField]
     private TMP_Text _countMoneyText;
 
@@ -13,32 +14,40 @@ public class FightWindowView : MonoBehaviour
     [SerializeField]
     private TMP_Text _countPowerText;
 
+    [Header("Enemy configs")]
     [SerializeField]
     private TMP_Text _countPowerEnemyText;
 
+    [SerializeField] 
+    private TMP_Text _countCrimeEnemyText;
 
+    [Header("Money")]
     [SerializeField]
     private Button _addMoneyButton;
 
     [SerializeField]
     private Button _minusMoneyButton;
 
-
+    [Header("Health")]
     [SerializeField]
     private Button _addHealthButton;
 
     [SerializeField]
     private Button _minusHealthButton;
 
-
+    [Header("Power")]
     [SerializeField]
     private Button _addPowerButton;
 
     [SerializeField]
     private Button _minusPowerButton;
-
+    
+    [Header("Action buttons")]
     [SerializeField]
     private Button _fightButton;
+
+    [SerializeField] 
+    private Button _skipFight;
 
     private Enemy _enemy;
 
@@ -73,6 +82,12 @@ public class FightWindowView : MonoBehaviour
         _minusPowerButton.onClick.AddListener(() => ChangePower(false));
 
         _fightButton.onClick.AddListener(Fight);
+        _skipFight.onClick.AddListener(SkipFight);
+    }
+
+    private void SkipFight()
+    {
+        Debug.Log("You skipped the fight");
     }
 
     private void OnDestroy()
@@ -87,6 +102,7 @@ public class FightWindowView : MonoBehaviour
         _minusPowerButton.onClick.RemoveAllListeners();
 
         _fightButton.onClick.RemoveAllListeners();
+        _skipFight.onClick.RemoveAllListeners();
 
         _money.Detach(_enemy);
         _health.Detach(_enemy);
@@ -133,21 +149,29 @@ public class FightWindowView : MonoBehaviour
         switch (dataType)
         {
             case DataType.Money:
-                _countMoneyText.text = $"Player money: {countChangeData}";
+                _countMoneyText.text = $"Player Money: {countChangeData}";
                 _money.CountMoney = countChangeData;
                 break;
 
             case DataType.Health:
-                _countHealthText.text = $"Player health: {countChangeData}";
+                _countHealthText.text = $"Player Health: {countChangeData}";
                 _health.CountHealth = countChangeData;
                 break;
 
             case DataType.Power:
-                _countPowerText.text = $"Player power: {countChangeData}";
+                _countPowerText.text = $"Player Power: {countChangeData}";
                 _power.CountPower = countChangeData;
                 break;
         }
 
-        _countPowerEnemyText.text = $"Enemy power: {_enemy.Power}";
+        _countPowerEnemyText.text = $"Enemy Power: {_enemy.Power}";
+        _countCrimeEnemyText.text = $"Emeny Crime: {_enemy.Crime}";
+
+        var PowerToSkipFight = 5;
+        
+        if (_enemy.Crime < 5 || _power.CountPower > _enemy.Power+PowerToSkipFight)
+            _skipFight.gameObject.SetActive(true);
+        else
+            _skipFight.gameObject.SetActive(false);
     }
 }
