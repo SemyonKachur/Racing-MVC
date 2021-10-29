@@ -1,4 +1,7 @@
-using Game.Car;
+using Features.Abilities;
+using Game;
+using Game.Transport;
+using Inventory;
 using Tool;
 using UnityEngine;
 
@@ -7,24 +10,21 @@ namespace Profile
     internal class ProfilePlayer
     {
         [field: SerializeField] public SubscriptionProperty<GameState> CurrentState;
-        [field: SerializeField] public CarModel CurrentCar;
-        [field: SerializeField] public Transport Transport;
+        [field: SerializeField] public TransportModel CurrentTransport;
+        [field: SerializeField] public InventoryModel Inventory;
+        [field: SerializeField] public AbilitiesModel Abilities;
         [field: SerializeField] public int Gold;
         [field: SerializeField] public int Oil;
 
 
-        public ProfilePlayer(float speedCar, GameState initialState,Transport transport,int gold, int oil) : this(speedCar)
+        public ProfilePlayer(float transportSpeed,TransportType transportType, GameState initialState,int gold, int oil)
         {
-            CurrentState.Value = initialState;
-            Transport = transport;
+            CurrentState = new SubscriptionProperty<GameState>(initialState);;
+            CurrentTransport = new TransportModel(transportSpeed, transportType);
+            Inventory = new InventoryModel();
+            Abilities = new AbilitiesModel();
             Gold = gold;
             Oil = oil;
-        }
-        
-        public ProfilePlayer(float speedCar)
-        {
-            CurrentState = new SubscriptionProperty<GameState>();
-            CurrentCar = new CarModel(speedCar);
         }
 
         public void AddGold(int ammountOfGold)

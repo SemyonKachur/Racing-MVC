@@ -18,8 +18,11 @@ namespace Tool
 
         public static UnityAdsSettings LoadAdsSettings(ResourcePath path) =>
             Resources.Load<UnityAdsSettings>(path.PathResource);
+        
         public static ProductLibrary LoadProductLibrary(ResourcePath path) =>
             Resources.Load<ProductLibrary>(path.PathResource);
         
+        public static Rigidbody2D LoadObject(ResourcePath path) =>
+            Resources.Load<Rigidbody2D>(path.PathResource);
     }
 }

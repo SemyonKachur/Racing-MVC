@@ -420,4 +420,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c1f1f3a311c471e921b56ebcc0f1a0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerStats: {fileID: 11400000, guid: 79be8f37f8a144743861a67ca5b5fdf6, type: 2}
+  _inventoryModelConfig: {fileID: 11400000, guid: 85f208dcff778b04789dfcefad60c004, type: 2}
+  _upgradeItemConfigDataSource: {fileID: 11400000, guid: cacb098d10e60b340a15f11ac7d508f5, type: 2}
+  _abilitiesModelConfig: {fileID: 11400000, guid: b79cbe3a6337e5b4985f7da3716185aa, type: 2}
   _placeForUi: {fileID: 1903552}

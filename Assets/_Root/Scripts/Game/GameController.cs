@@ -1,7 +1,9 @@
+using Features.Abilities;
 using Game.Boat;
 using Game.Car;
 using Game.InputLogic;
 using Game.TapeBackground;
+using Game.Transport;
 using Profile;
 using Services.Analytics;
 using Tool;
@@ -11,28 +13,41 @@ namespace Game
     internal class GameController : BaseController
     {
         private AnalyticsManager Analytics = AnalyticsManager.GetAnalytics();
+        public TransportController _transport { get; }
+        private ProfilePlayer _profilePlayer;
         public GameController(ProfilePlayer profilePlayer)
         {
-           Analytics.GameStarted();
+            _profilePlayer = profilePlayer;
+            Analytics.GameStarted();
             var leftMoveDiff = new SubscriptionProperty<float>();
             var rightMoveDiff = new SubscriptionProperty<float>();
 
             var tapeBackgroundController = new TapeBackgroundController(leftMoveDiff, rightMoveDiff);
             AddController(tapeBackgroundController);
 
-            var inputGameController = new InputGameController(leftMoveDiff, rightMoveDiff, profilePlayer.CurrentCar);
+            var inputGameController = new InputGameController(leftMoveDiff, rightMoveDiff, profilePlayer.CurrentTransport);
             AddController(inputGameController);
+            
+            _transport = CreateController();
+        }
 
-            if (profilePlayer.Transport == Transport.Car)
+        private TransportController CreateController()
+        {
+            TransportController transportController;
+            switch (_profilePlayer.CurrentTransport.Type)
             {
-                var carController = new CarController();
-                AddController(carController);
+                case TransportType.Car:
+                    transportController = new CarController();
+                    break;
+                case TransportType.Boat:
+                    transportController = new BoatController();
+                    break;
+                default:
+                    transportController = new TransportController(TransportType.Car);
+                    break;
             }
-            else if (profilePlayer.Transport == Transport.Boat)
-            {
-                var boatController = new BoatController();
-                AddController(boatController);
-            }
+            AddController(transportController);
+            return transportController;
         }
     }
 }

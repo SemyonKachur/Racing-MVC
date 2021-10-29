@@ -5,6 +5,7 @@ namespace Profile
         None,
         Settings,
         Start,
-        Game
+        Game,
+        Shed
     }
 }

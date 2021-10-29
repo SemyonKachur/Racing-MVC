@@ -7,6 +7,7 @@ using Object = UnityEngine.Object;
 internal abstract class BaseController : IDisposable
 {
     private List<BaseController> _baseControllers;
+    private List<IRepository> _repositories;
     private List<GameObject> _gameObjects;
     private bool _isDisposed;
 
@@ -43,6 +44,16 @@ internal abstract class BaseController : IDisposable
 
         _gameObjects.Clear();
     }
+    private void DisposeRepositories()
+    {
+        if (_repositories == null)
+            return;
+
+        foreach (IRepository repository in _repositories)
+            repository?.Dispose();
+
+        _repositories.Clear();
+    }
 
     protected virtual void OnDispose() { }
 
@@ -51,6 +62,11 @@ internal abstract class BaseController : IDisposable
     {
         _baseControllers ??= new List<BaseController>();
         _baseControllers.Add(baseController);
+    }
+    protected void AddRepository(IRepository repository)
+    {
+        _repositories ??= new List<IRepository>();
+        _repositories.Add(repository);
     }
 
     protected void AddGameObject(GameObject gameObject)
