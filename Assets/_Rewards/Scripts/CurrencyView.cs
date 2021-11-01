@@ -26,28 +26,22 @@ public class CurrencyView : MonoBehaviour
         set => PlayerPrefs.SetInt(DiamondKey, value);
     }
 
-    private void Awake()
+    public void Init()
     {
         if (Instance == null)
             Instance = this;
-    }
-
-    private void Start()
-    {
         RefreshText();
     }
 
     public void AddWood(int value)
     {
         Wood += value;
-
         RefreshText();
     }
 
     public void AddDiamond(int value)
     {
         Diamond += value;
-
         RefreshText();
     }
 

@@ -5,28 +5,28 @@ using UnityEngine;
 
 public class DailyRewardController
 {
-       private DailyRewardView _dailyRewardView;
-   private List<ContainerSlotRewardView> _slots;
+    private DailyRewardView _dailyRewardView;
+    private List<ContainerSlotRewardView> _slots;
   
-   private bool _isGetReward;
+    private bool _isGetReward;
 
-   public DailyRewardController(DailyRewardView generateLevelView)
-   {
+    public DailyRewardController(DailyRewardView generateLevelView)
+    {
        _dailyRewardView = generateLevelView;
-   }
+    }
   
-   public void RefreshView()
-   {
+    public void RefreshView()
+    {
        InitSlots();
       
        _dailyRewardView.StartCoroutine(RewardsStateUpdater());
       
        RefreshUi();
        SubscribeButtons();
-   }
+    }
 
-   private void InitSlots()
-   {
+    private void InitSlots()
+    {
        _slots = new List<ContainerSlotRewardView>();
 
        for (var i = 0; i < _dailyRewardView.Rewards.Count; i++)
@@ -38,17 +38,17 @@ public class DailyRewardController
        }
    }
 
-   private IEnumerator RewardsStateUpdater()
-   {
+    private IEnumerator RewardsStateUpdater()
+    {
        while (true)
        {
            RefreshRewardsState();
            yield return new WaitForSeconds(1);
        }
-   }
+    }
 
-   private void RefreshRewardsState()
-   {
+    private void RefreshRewardsState()
+    {
        _isGetReward = true;
 
        if (_dailyRewardView.TimeGetReward.HasValue)
@@ -69,8 +69,8 @@ public class DailyRewardController
        RefreshUi();
    }
 
-   private void RefreshUi()
-   {
+    private void RefreshUi()
+    {
        _dailyRewardView.GetRewardButton.interactable = _isGetReward;
 
        if (_isGetReward)
@@ -91,7 +91,7 @@ public class DailyRewardController
 
        for (var i = 0; i < _slots.Count; i++)
            _slots[i].SetData(_dailyRewardView.Rewards[i],i + 1, i == _dailyRewardView.CurrentSlotInActive);
-   }
+    }
 
    private void SubscribeButtons()
    {
