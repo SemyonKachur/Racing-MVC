@@ -1,12 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Profile;
 using UnityEngine;
 
-public class DailyRewardController
+internal class DailyRewardController : BaseController, IDisposable
 {
     private DailyRewardView _dailyRewardView;
     private List<ContainerSlotRewardView> _slots;
+    public event Action _mainMenu;
   
     private bool _isGetReward;
 
@@ -75,7 +77,7 @@ public class DailyRewardController
 
        if (_isGetReward)
        {
-           _dailyRewardView.TimerNewReward.text = "The reward is received today";
+           _dailyRewardView.TimerNewDailyReward.text = "It's time to get reward !";
        }
        else
        {
@@ -83,9 +85,15 @@ public class DailyRewardController
            {
                var nextClaimTime = _dailyRewardView.TimeGetReward.Value.AddSeconds(_dailyRewardView.TimeCooldown);
                var currentClaimCooldown = nextClaimTime - DateTime.UtcNow;
+               var sec = currentClaimCooldown.TotalSeconds;
+               ToolBarViewTimer((int)sec);
                var timeGetReward = $"{currentClaimCooldown.Days:D2}:{currentClaimCooldown.Hours:D2}:{currentClaimCooldown.Minutes:D2}:{currentClaimCooldown.Seconds:D2}";
-      
-               _dailyRewardView.TimerNewReward.text = $"Time to get the next reward: {timeGetReward}";
+               if (currentClaimCooldown <= TimeSpan.Zero)
+               {
+                   _dailyRewardView.GetRewardButton.interactable = true;
+                   currentClaimCooldown = TimeSpan.Zero;
+               } 
+               _dailyRewardView.TimerNewDailyReward.text = $"Time to get the next reward: {timeGetReward}";
            }
        }
 
@@ -93,10 +101,18 @@ public class DailyRewardController
            _slots[i].SetData(_dailyRewardView.Rewards[i],i + 1, i == _dailyRewardView.CurrentSlotInActive);
     }
 
+    private void ToolBarViewTimer(int sec)
+    {
+        float kef = 1 / _dailyRewardView.TimeCooldown;
+        var progressBar = _dailyRewardView.TimeCooldown - sec;
+        _dailyRewardView.TimerDailyRewardBar.fillAmount = kef * progressBar;
+    }
+
    private void SubscribeButtons()
    {
        _dailyRewardView.GetRewardButton.onClick.AddListener(ClaimReward);
        _dailyRewardView.ResetButton.onClick.AddListener(ResetTimer);
+       _dailyRewardView.BackButton.onClick.AddListener(BackToMainMenu);
    }
 
    private void ClaimReward()
@@ -125,5 +141,14 @@ public class DailyRewardController
    private void ResetTimer()
    {
        PlayerPrefs.DeleteAll();
+       CurrencyView.Instance.RefreshText();
+   }
+   private void BackToMainMenu()
+   {
+       _mainMenu.Invoke();
+   }
+
+   public void Dispose()
+   {
    }
 }

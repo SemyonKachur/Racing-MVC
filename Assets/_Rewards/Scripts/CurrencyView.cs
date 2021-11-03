@@ -45,7 +45,7 @@ public class CurrencyView : MonoBehaviour
         RefreshText();
     }
 
-    private void RefreshText()
+    public void RefreshText()
     {
         _currentCountWood.text = Wood.ToString();
         _currentCountDiamond.text = Diamond.ToString();
