@@ -8,33 +8,34 @@ public class DailyRewardView : MonoBehaviour
 {
     private const string CurrentSlotInActiveKey = nameof(CurrentSlotInActiveKey);
     private const string TimeGetRewardKey = nameof(TimeGetRewardKey);
+    [Header("Timers")]
+    [field: SerializeField] public float TimeCooldown = 86400;
+    [field: SerializeField] public float TimeDeadline = 172800;
+    [Header("Lists of rewards")]
+    [field: SerializeField] public List<Reward> DailyRewards;
+    [field: SerializeField] public List<Reward> WeeklyRewards;
 
-    [SerializeField] private float _timeCooldown = 86400;
-    [SerializeField] private float _timeDeadline = 172800;
-
-    [SerializeField] private List<Reward> _rewards;
-    [SerializeField] private TMP_Text _timerNewDailyReward;
+    [Header("Timer's progress bar")]
+    [field: SerializeField] public TMP_Text TimerNewDailyReward;
     [field: SerializeField] public Image TimerDailyRewardBar;
-
-    [SerializeField] private Transform _mountRootSlotsReward;
-    [SerializeField] private ContainerSlotRewardView _containerSlotRewardView;
-
-    [SerializeField] private Button _getRewardButton;
-    [SerializeField] private Button _resetButton;
-    [SerializeField] private Button _backButton;
-
-    public ContainerSlotRewardView ContainerSlotRewardView => _containerSlotRewardView;
-    public Button GetRewardButton => _getRewardButton;
-    public Button ResetButton => _resetButton;
-    public Button BackButton => _backButton; 
-    public Transform MountRootSlotsReward => _mountRootSlotsReward;
-    public TMP_Text TimerNewDailyReward => _timerNewDailyReward;
+    [field: SerializeField] public TMP_Text TimerNewWeeklyReward;
+    [field: SerializeField] public Image TimerWeeklyRewardBar;
+    [Header("Conteiners")]
+    [field: SerializeField] public Transform DailyRootSlotsReward;
+    [field: SerializeField] public ContainerSlotRewardView DailyContainerSlotRewardView;
+    [field: SerializeField] public Transform WeeklyRootSlotsReward;
+    [field: SerializeField] public ContainerSlotRewardView WeeklyContainerSlotRewardView;
+    [Header("Buttons")]
+    [field: SerializeField] public Button GetRewardButton;
+    [field: SerializeField] public Button ResetButton;
+    [field: SerializeField] public Button BackButton;
     
-    public List<Reward> Rewards => _rewards;
-    public float TimeDeadline => _timeDeadline;
-    public float TimeCooldown => _timeCooldown;
-    
-    public int CurrentSlotInActive
+    public int CurrentDailySlotInActive
+    {
+        get => PlayerPrefs.GetInt(CurrentSlotInActiveKey, 0);
+        set => PlayerPrefs.SetInt(CurrentSlotInActiveKey, value);
+    }
+    public int CurrentWeeklySlotInActive
     {
         get => PlayerPrefs.GetInt(CurrentSlotInActiveKey, 0);
         set => PlayerPrefs.SetInt(CurrentSlotInActiveKey, value);
@@ -62,8 +63,8 @@ public class DailyRewardView : MonoBehaviour
 
     private void OnDestroy()
     {
-        _getRewardButton.onClick.RemoveAllListeners();
-        _resetButton.onClick.RemoveAllListeners();
-        _backButton.onClick.RemoveAllListeners();
+        GetRewardButton.onClick.RemoveAllListeners();
+        ResetButton.onClick.RemoveAllListeners();
+        BackButton.onClick.RemoveAllListeners();
     }
 }

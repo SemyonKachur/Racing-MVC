@@ -13,9 +13,10 @@ namespace Rewards
         private readonly Transform _placeForUI;
         
         private DailyRewardController _dailyRewardController;
+        private WeeklyRewardController _weeklyRewardController;
         private CurrencyView _currencyView;
         private DailyRewardView _dailyRewardView;
-      
+
         public RewardsController(Transform placeForUi, ProfilePlayer profilePlayer)
         {
             _profilePlayer = profilePlayer ?? throw new ArgumentNullException(nameof(profilePlayer));
@@ -28,6 +29,9 @@ namespace Rewards
             AddController(_dailyRewardController);
             _dailyRewardController.RefreshView();
             _dailyRewardController._mainMenu += GoToMainMenu;
+            _weeklyRewardController = new WeeklyRewardController(_dailyRewardView);
+            AddController(_weeklyRewardController);
+            _weeklyRewardController.RefreshView();
         }
 
         private void GoToMainMenu()

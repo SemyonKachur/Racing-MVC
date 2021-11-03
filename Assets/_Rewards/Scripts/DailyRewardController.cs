@@ -31,10 +31,10 @@ internal class DailyRewardController : BaseController, IDisposable
     {
        _slots = new List<ContainerSlotRewardView>();
 
-       for (var i = 0; i < _dailyRewardView.Rewards.Count; i++)
+       for (var i = 0; i < _dailyRewardView.DailyRewards.Count; i++)
        {
-           var instanceSlot = GameObject.Instantiate(_dailyRewardView.ContainerSlotRewardView,
-               _dailyRewardView.MountRootSlotsReward, false);
+           var instanceSlot = GameObject.Instantiate(_dailyRewardView.DailyContainerSlotRewardView,
+               _dailyRewardView.DailyRootSlotsReward, false);
 
            _slots.Add(instanceSlot);
        }
@@ -60,7 +60,7 @@ internal class DailyRewardController : BaseController, IDisposable
            if (timeSpan.Seconds > _dailyRewardView.TimeDeadline)
            {
                _dailyRewardView.TimeGetReward = null;
-               _dailyRewardView.CurrentSlotInActive = 0;
+               _dailyRewardView.CurrentDailySlotInActive = 0;
            }
            else if (timeSpan.Seconds < _dailyRewardView.TimeCooldown)
            {
@@ -98,7 +98,7 @@ internal class DailyRewardController : BaseController, IDisposable
        }
 
        for (var i = 0; i < _slots.Count; i++)
-           _slots[i].SetData(_dailyRewardView.Rewards[i],i + 1, i == _dailyRewardView.CurrentSlotInActive);
+           _slots[i].SetData(_dailyRewardView.DailyRewards[i],i + 1, i == _dailyRewardView.CurrentDailySlotInActive);
     }
 
     private void ToolBarViewTimer(int sec)
@@ -120,7 +120,7 @@ internal class DailyRewardController : BaseController, IDisposable
        if (!_isGetReward)
            return;
 
-       var reward = _dailyRewardView.Rewards[_dailyRewardView.CurrentSlotInActive];
+       var reward = _dailyRewardView.DailyRewards[_dailyRewardView.CurrentDailySlotInActive];
 
        switch (reward.RewardType)
        {
@@ -133,7 +133,7 @@ internal class DailyRewardController : BaseController, IDisposable
        }
 
        _dailyRewardView.TimeGetReward = DateTime.UtcNow;
-       _dailyRewardView.CurrentSlotInActive = (_dailyRewardView.CurrentSlotInActive + 1) % _dailyRewardView.Rewards.Count;
+       _dailyRewardView.CurrentDailySlotInActive = (_dailyRewardView.CurrentDailySlotInActive + 1) % _dailyRewardView.DailyRewards.Count;
 
        RefreshRewardsState();
    }
