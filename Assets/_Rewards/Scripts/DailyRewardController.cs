@@ -8,9 +8,9 @@ internal class DailyRewardController : BaseController, IDisposable
 {
     private DailyRewardView _dailyRewardView;
     private List<ContainerSlotRewardView> _slots;
+    private TimeSpan currentClaimCooldown;
     public event Action _mainMenu;
-  
-    private bool _isGetReward;
+    private bool _isGetDailyReward;
 
     public DailyRewardController(DailyRewardView generateLevelView)
     {
@@ -20,9 +20,7 @@ internal class DailyRewardController : BaseController, IDisposable
     public void RefreshView()
     {
        InitSlots();
-      
-       _dailyRewardView.StartCoroutine(RewardsStateUpdater());
-      
+      _dailyRewardView.StartCoroutine(RewardsStateUpdater());
        RefreshUi();
        SubscribeButtons();
     }
@@ -30,12 +28,10 @@ internal class DailyRewardController : BaseController, IDisposable
     private void InitSlots()
     {
        _slots = new List<ContainerSlotRewardView>();
-
        for (var i = 0; i < _dailyRewardView.DailyRewards.Count; i++)
        {
            var instanceSlot = GameObject.Instantiate(_dailyRewardView.DailyContainerSlotRewardView,
                _dailyRewardView.DailyRootSlotsReward, false);
-
            _slots.Add(instanceSlot);
        }
    }
@@ -51,7 +47,7 @@ internal class DailyRewardController : BaseController, IDisposable
 
     private void RefreshRewardsState()
     {
-       _isGetReward = true;
+       _isGetDailyReward = true;
 
        if (_dailyRewardView.TimeGetReward.HasValue)
        {
@@ -64,18 +60,17 @@ internal class DailyRewardController : BaseController, IDisposable
            }
            else if (timeSpan.Seconds < _dailyRewardView.TimeCooldown)
            {
-               _isGetReward = false;
+               _isGetDailyReward = false;
            }
        }
-
        RefreshUi();
    }
 
     private void RefreshUi()
     {
-       _dailyRewardView.GetRewardButton.interactable = _isGetReward;
+       // _dailyRewardView.GetRewardButton.interactable = _isGetDailyReward;
 
-       if (_isGetReward)
+       if (_isGetDailyReward)
        {
            _dailyRewardView.TimerNewDailyReward.text = "It's time to get reward !";
        }
@@ -84,7 +79,7 @@ internal class DailyRewardController : BaseController, IDisposable
            if (_dailyRewardView.TimeGetReward != null)
            {
                var nextClaimTime = _dailyRewardView.TimeGetReward.Value.AddSeconds(_dailyRewardView.TimeCooldown);
-               var currentClaimCooldown = nextClaimTime - DateTime.UtcNow;
+               currentClaimCooldown = nextClaimTime - DateTime.UtcNow;
                var sec = currentClaimCooldown.TotalSeconds;
                ToolBarViewTimer((int)sec);
                var timeGetReward = $"{currentClaimCooldown.Days:D2}:{currentClaimCooldown.Hours:D2}:{currentClaimCooldown.Minutes:D2}:{currentClaimCooldown.Seconds:D2}";
@@ -98,7 +93,7 @@ internal class DailyRewardController : BaseController, IDisposable
        }
 
        for (var i = 0; i < _slots.Count; i++)
-           _slots[i].SetData(_dailyRewardView.DailyRewards[i],i + 1, i == _dailyRewardView.CurrentDailySlotInActive);
+           _slots[i].SetData(_dailyRewardView.DailyRewards[i],i + 1, i == _dailyRewardView.CurrentDailySlotInActive,PlayerRewardType.Daily);
     }
 
     private void ToolBarViewTimer(int sec)
@@ -114,10 +109,10 @@ internal class DailyRewardController : BaseController, IDisposable
        _dailyRewardView.ResetButton.onClick.AddListener(ResetTimer);
        _dailyRewardView.BackButton.onClick.AddListener(BackToMainMenu);
    }
-
-   private void ClaimReward()
+  
+   public void ClaimReward()
    {
-       if (!_isGetReward)
+       if (!_isGetDailyReward)
            return;
 
        var reward = _dailyRewardView.DailyRewards[_dailyRewardView.CurrentDailySlotInActive];
@@ -145,7 +140,7 @@ internal class DailyRewardController : BaseController, IDisposable
    }
    private void BackToMainMenu()
    {
-       _mainMenu.Invoke();
+       _mainMenu?.Invoke();
    }
 
    public void Dispose()

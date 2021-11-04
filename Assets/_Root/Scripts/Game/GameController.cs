@@ -33,19 +33,7 @@ namespace Game
 
         private TransportController CreateController()
         {
-            TransportController transportController;
-            switch (_profilePlayer.CurrentTransport.Type)
-            {
-                case TransportType.Car:
-                    transportController = new CarController();
-                    break;
-                case TransportType.Boat:
-                    transportController = new BoatController();
-                    break;
-                default:
-                    transportController = new TransportController(TransportType.Car);
-                    break;
-            }
+            TransportController transportController = new TransportController(_profilePlayer.CurrentTransport.Type);
             AddController(transportController);
             return transportController;
         }

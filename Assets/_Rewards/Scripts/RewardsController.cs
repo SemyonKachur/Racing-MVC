@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Rewards
 {
-    internal class RewardsController : BaseController
+    internal class RewardsController : BaseController, IDisposable
     {
         private readonly ResourcePath _viewPath = new ResourcePath("Prefabs/Daily Reward Window");
         private readonly ResourcePath _path = new ResourcePath("Prefabs/Currency Window");
@@ -15,21 +15,21 @@ namespace Rewards
         private DailyRewardController _dailyRewardController;
         private WeeklyRewardController _weeklyRewardController;
         private CurrencyView _currencyView;
-        private DailyRewardView _dailyRewardView;
+        private DailyRewardView _rewardView;
 
         public RewardsController(Transform placeForUi, ProfilePlayer profilePlayer)
         {
             _profilePlayer = profilePlayer ?? throw new ArgumentNullException(nameof(profilePlayer));
             _placeForUI = placeForUi;
-            _dailyRewardView = LoadRewardMenuView();
+            _rewardView = LoadRewardMenuView();
             _currencyView = LoadCurrcenyView();
             _currencyView.Init();
             
-            _dailyRewardController = new DailyRewardController(_dailyRewardView);
+            _dailyRewardController = new DailyRewardController(_rewardView);
             AddController(_dailyRewardController);
             _dailyRewardController.RefreshView();
             _dailyRewardController._mainMenu += GoToMainMenu;
-            _weeklyRewardController = new WeeklyRewardController(_dailyRewardView);
+            _weeklyRewardController = new WeeklyRewardController(_rewardView);
             AddController(_weeklyRewardController);
             _weeklyRewardController.RefreshView();
         }
@@ -53,8 +53,13 @@ namespace Rewards
             GameObject prefab = ResourcesLoader.LoadPrefab(_viewPath);
             GameObject objectView = GameObject.Instantiate(prefab, _placeForUI, false);
             AddGameObject(objectView);
-            _dailyRewardView = objectView.GetComponent<DailyRewardView>();
-            return _dailyRewardView;
+            _rewardView = objectView.GetComponent<DailyRewardView>();
+            return _rewardView;
+        }
+        public void Dispose()
+        {
+            base.Dispose();
+            _dailyRewardController._mainMenu -= GoToMainMenu;
         }
 
     }

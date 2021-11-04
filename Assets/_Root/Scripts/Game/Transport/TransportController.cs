@@ -1,4 +1,5 @@
-﻿using Features.Abilities;
+﻿using System;
+using Features.Abilities;
 using Game.Boat;
 using Game.Car;
 using UnityEngine;
@@ -14,18 +15,24 @@ namespace Game.Transport
 
         public TransportController(TransportType type)
         {
-            if (type == TransportType.Car)
+            switch (type)
             {
-                _carController = new CarController();
-                _transportView = _carController.GetViewObject();
-                AddController(_carController);
+                case TransportType.Car:
+                    _carController = new CarController();
+                    _transportView = _carController.GetViewObject();
+                    AddController(_carController);
+                    break;
+                case TransportType.Boat:
+                    _boatController = new BoatController();
+                    _transportView = _boatController.GetViewObject();
+                    AddController(_boatController);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(type), type, null);
             }
-            else if (type == TransportType.Boat)
-            {
-                _boatController = new BoatController();
-                _transportView = _boatController.GetViewObject();
-                AddController(_boatController);
-            }
+        }
+        protected TransportController()
+        {
         }
 
         public GameObject GetViewObject()

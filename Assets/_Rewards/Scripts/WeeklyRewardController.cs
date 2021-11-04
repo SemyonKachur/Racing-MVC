@@ -9,8 +9,10 @@ namespace Rewards
     { 
         private DailyRewardView _dailyRewardView;
         private List<ContainerSlotRewardView> _slots;
-  
-        private bool _isGetReward;
+        private TimeSpan currentClaimCooldown;
+
+        private bool _isGetWeeklyReward;
+        public event Action<WeeklyRewardController> GetReward; 
 
         public WeeklyRewardController(DailyRewardView generateLevelView)
         {
@@ -20,9 +22,7 @@ namespace Rewards
         public void RefreshView()
         {
            InitSlots();
-          
-           _dailyRewardView.StartCoroutine(RewardsStateUpdater());
-          
+          _dailyRewardView.StartCoroutine(RewardsStateUpdater());
            RefreshUi();
            SubscribeButtons();
         }
@@ -30,12 +30,10 @@ namespace Rewards
         private void InitSlots()
         {
            _slots = new List<ContainerSlotRewardView>();
-
            for (var i = 0; i < _dailyRewardView.WeeklyRewards.Count; i++)
            {
                var instanceSlot = GameObject.Instantiate(_dailyRewardView.WeeklyContainerSlotRewardView,
                    _dailyRewardView.WeeklyRootSlotsReward, false);
-
                _slots.Add(instanceSlot);
            }
         }
@@ -51,8 +49,7 @@ namespace Rewards
 
         private void RefreshRewardsState()
         {
-           _isGetReward = true;
-
+           _isGetWeeklyReward = true;
            if (_dailyRewardView.TimeGetReward.HasValue)
            {
                var timeSpan = DateTime.UtcNow - _dailyRewardView.TimeGetReward.Value;
@@ -64,18 +61,17 @@ namespace Rewards
                }
                else if (timeSpan.Seconds < _dailyRewardView.TimeDeadline)
                {
-                   _isGetReward = false;
+                   _isGetWeeklyReward = false;
                }
            }
-
            RefreshUi();
        }
 
         private void RefreshUi()
         {
-           _dailyRewardView.GetRewardButton.interactable = _isGetReward;
+           _dailyRewardView.GetRewardButton.interactable = _isGetWeeklyReward;
 
-           if (_isGetReward)
+           if (_isGetWeeklyReward)
            {
                _dailyRewardView.TimerNewWeeklyReward.text = "It's time to get reward !";
            }
@@ -84,7 +80,7 @@ namespace Rewards
                if (_dailyRewardView.TimeGetReward != null)
                {
                    var nextClaimTime = _dailyRewardView.TimeGetReward.Value.AddSeconds(_dailyRewardView.TimeDeadline);
-                   var currentClaimCooldown = nextClaimTime - DateTime.UtcNow;
+                   currentClaimCooldown = nextClaimTime - DateTime.UtcNow;
                    var sec = currentClaimCooldown.TotalSeconds;
                    ToolBarViewTimer((int)sec);
                    var timeGetReward = $"{currentClaimCooldown.Days:D2}:{currentClaimCooldown.Hours:D2}:{currentClaimCooldown.Minutes:D2}:{currentClaimCooldown.Seconds:D2}";
@@ -96,9 +92,8 @@ namespace Rewards
                    _dailyRewardView.TimerNewWeeklyReward.text = $"Time to get the next reward: {timeGetReward}";
                }
            }
-
            for (var i = 0; i < _slots.Count; i++)
-               _slots[i].SetData(_dailyRewardView.WeeklyRewards[i],i + 1, i == _dailyRewardView.CurrentWeeklySlotInActive);
+               _slots[i].SetData(_dailyRewardView.WeeklyRewards[i],i + 1, i == _dailyRewardView.CurrentWeeklySlotInActive,PlayerRewardType.Weekly);
         }
 
         private void ToolBarViewTimer(int sec)
@@ -111,12 +106,11 @@ namespace Rewards
        private void SubscribeButtons()
        {
            _dailyRewardView.GetRewardButton.onClick.AddListener(ClaimReward);
-           // _dailyRewardView.ResetButton.onClick.AddListener(ResetTimer);
        }
 
-       private void ClaimReward()
+       public void ClaimReward()
        {
-           if (!_isGetReward)
+           if (!_isGetWeeklyReward)
                return;
 
            var reward = _dailyRewardView.WeeklyRewards[_dailyRewardView.CurrentWeeklySlotInActive];
