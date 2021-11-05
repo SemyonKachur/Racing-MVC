@@ -21,7 +21,9 @@ namespace Ui
             _unityAds = UnityAdsService.GetUnityAds();
             _iapService = IAPService.GetIAPService();
             _view = LoadView(placeForUi);
-            _view.Init(StartGame,Settings,Reward,BuyItem, BuyOil,Shed, profilePlayer.Gold, profilePlayer.Oil);
+            _view.Init(StartGame, Settings, Reward, BuyItem, BuyOil, Shed, RewardsMenu, 
+                profilePlayer.Gold, 
+                profilePlayer.Oil);
         }
 
         private MainMenuView LoadView(Transform placeForUi)
@@ -40,6 +42,8 @@ namespace Ui
             _profilePlayer.CurrentState.Value = GameState.Settings;
         private void Shed() =>
             _profilePlayer.CurrentState.Value = GameState.Shed;
+        private void RewardsMenu() =>
+            _profilePlayer.CurrentState.Value = GameState.Rewards;
 
         private void Reward() => _unityAds.RewardedPlayer.Play();
 

@@ -4,7 +4,7 @@ using Features.Abilities;
 using Ui;
 using Game;
 using Profile;
-using Services.Ads.UnityAds;
+using Rewards;
 using Shed;
 using UnityEngine;
 
@@ -15,6 +15,7 @@ internal class MainController : BaseController
     private GameController _gameController;
     private SettingsController _setingsController;
     private AbilitiesController _abilitiesController;
+    private RewardsController _rewardsController;
     
     private readonly Transform _placeForUi;
     private readonly ProfilePlayer _profilePlayer;
@@ -60,6 +61,10 @@ internal class MainController : BaseController
                 DisposeControllers();
                 _shedController = new ShedController(_placeForUi, _profilePlayer, _upgradeItemConfigs);
                 break;
+            case GameState.Rewards:
+                DisposeControllers();
+                _rewardsController = new RewardsController(_placeForUi,_profilePlayer);
+                break;
             default:
                 DisposeControllers();
                 break;
@@ -72,5 +77,6 @@ internal class MainController : BaseController
         _setingsController?.Dispose();
         _shedController?.Dispose();
         _abilitiesController?.Dispose();
+        _rewardsController?.Dispose();
     }
 }
