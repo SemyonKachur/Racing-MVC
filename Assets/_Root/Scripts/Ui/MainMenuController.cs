@@ -13,6 +13,8 @@ namespace Ui
         private readonly ResourcePath _resourcePath = new ResourcePath("Prefabs/mainMenu");
         private readonly ProfilePlayer _profilePlayer;
         private readonly MainMenuView _view;
+
+        private PopUpView _popUpView;
         private UnityAdsService _unityAds;
         private IAPService _iapService;
        
@@ -25,6 +27,8 @@ namespace Ui
             _view.Init(StartGame, Settings, Reward, BuyItem, BuyOil, Shed, RewardsMenu, 
                 profilePlayer.Gold, 
                 profilePlayer.Oil);
+            _popUpView = _view.GetComponent<PopUpView>();
+            _popUpView.ShowPopup();
         }
 
         private MainMenuView LoadView(Transform placeForUi)

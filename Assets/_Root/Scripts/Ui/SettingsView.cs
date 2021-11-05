@@ -6,13 +6,13 @@ namespace Ui
 {
     internal class SettingsView : MonoBehaviour
     {
-        [SerializeField] private Button _buttonBack;
+        [field: SerializeField] public Button ButtonBack;
 
 
         public void Init(UnityAction backToMainMenu) =>
-            _buttonBack.onClick.AddListener(backToMainMenu);
+            ButtonBack.onClick.AddListener(backToMainMenu);
 
         public void OnDestroy() =>
-            _buttonBack.onClick.RemoveAllListeners();
+            ButtonBack.onClick.RemoveAllListeners();
     }
 }

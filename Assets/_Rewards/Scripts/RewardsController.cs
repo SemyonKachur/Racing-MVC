@@ -16,27 +16,44 @@ namespace Rewards
         private WeeklyRewardController _weeklyRewardController;
         private CurrencyView _currencyView;
         private DailyRewardView _rewardView;
+        private PopUpView _popUpView;
 
         public RewardsController(Transform placeForUi, ProfilePlayer profilePlayer)
         {
             _profilePlayer = profilePlayer ?? throw new ArgumentNullException(nameof(profilePlayer));
             _placeForUI = placeForUi;
             _rewardView = LoadRewardMenuView();
+            _popUpView = _rewardView.gameObject.GetComponent<PopUpView>();
             _currencyView = LoadCurrcenyView();
             _currencyView.Init();
             
             _dailyRewardController = new DailyRewardController(_rewardView);
             AddController(_dailyRewardController);
             _dailyRewardController.RefreshView();
-            _dailyRewardController._mainMenu += GoToMainMenu;
+            _dailyRewardController._mainMenu += Back;
             _weeklyRewardController = new WeeklyRewardController(_rewardView);
             AddController(_weeklyRewardController);
             _weeklyRewardController.RefreshView();
+            
+            _popUpView.ShowPopup();
         }
 
-        private void GoToMainMenu()
+        private void Back()
         {
-            _profilePlayer.CurrentState.Value = GameState.Start;
+            var buttonBack = _rewardView.BackButton.GetComponent<CustomButton>();
+            buttonBack._animationEnd += ChangeState;
+            buttonBack.ActivateAnimation();
+        }
+
+        private void ChangeState(GameState gameState)
+        {
+            _popUpView.AnimationComplete += Change;
+            _popUpView.HidePopup();
+            
+            void Change()
+            {
+                _profilePlayer.CurrentState.Value = GameState.Start;
+            }
         }
 
         private CurrencyView LoadCurrcenyView()
@@ -45,6 +62,7 @@ namespace Rewards
             GameObject objectView = GameObject.Instantiate(prefab, _placeForUI, false);
             AddGameObject(objectView);
             _currencyView = objectView.GetComponent<CurrencyView>();
+            
             return _currencyView;
         }
 
@@ -59,7 +77,7 @@ namespace Rewards
         public void Dispose()
         {
             base.Dispose();
-            _dailyRewardController._mainMenu -= GoToMainMenu;
+            _dailyRewardController._mainMenu -= Back;
         }
 
     }

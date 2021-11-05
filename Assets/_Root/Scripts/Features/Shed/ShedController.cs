@@ -17,12 +17,14 @@ namespace Shed
         private readonly UpgradeHandlersRepository _upgradeHandlersRepository;
         private readonly InventoryController _inventoryController;
         private readonly ShedView _view;
+        private PopUpView _popUpView;
 
 
         public ShedController(
-            [NotNull] Transform placeForUi,
-            [NotNull] ProfilePlayer profilePlayer,
-            [NotNull] IReadOnlyList<UpgradeItemConfig> upgradeItemConfigs)
+            Transform placeForUi,
+            ProfilePlayer profilePlayer,
+            IReadOnlyList<UpgradeItemConfig> upgradeItemConfigs)
+        
         {
             if (upgradeItemConfigs == null)
                 throw new ArgumentNullException(nameof(upgradeItemConfigs));
@@ -37,6 +39,10 @@ namespace Shed
 
             _view = LoadView(placeForUi);
             _view.Init(Apply, Back);
+
+            _popUpView = _view.gameObject.GetComponent<PopUpView>();
+            _popUpView._rect = _inventoryController.View.gameObject.GetComponent<RectTransform>();
+            _popUpView.ShowPopup();
         }
 
         private ShedView LoadView(Transform placeForUi)
@@ -50,13 +56,26 @@ namespace Shed
 
         private void Apply()
         {
-            UpgradeCarWithEquippedItems(
-                _profilePlayer.CurrentTransport,
-                _profilePlayer.Inventory.GetEquippedItems(),
-                _upgradeHandlersRepository.UpgradeItems);
+            var button = _view.ButtonApply.gameObject.GetComponent<CustomButton>();
+            button._animationEnd += ChangeState;
+            button.ActivateAnimation();
+        }
+        
+        private void ChangeState(GameState gameState)
+        {
+            _popUpView.AnimationComplete += Change;
+            _popUpView.HidePopup();
+            
+            void Change()
+            {
+                UpgradeCarWithEquippedItems(
+                    _profilePlayer.CurrentTransport,
+                    _profilePlayer.Inventory.GetEquippedItems(),
+                    _upgradeHandlersRepository.UpgradeItems);
 
-            _profilePlayer.CurrentState.Value = GameState.Start;
-            Log($"Apply. Current Speed: {_profilePlayer.CurrentTransport.Speed}");
+                _profilePlayer.CurrentState.Value = GameState.Start;
+                Log($"Apply. Current Speed: {_profilePlayer.CurrentTransport.Speed}");
+            }
         }
 
         private void Back()

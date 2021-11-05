@@ -101,7 +101,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 48541148fa692441a85113e88999424c, type: 3}
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -253,7 +253,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 77237084d67f848cd9c89a28f0b3c421, type: 3}
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -687,7 +687,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5a5d5fbf2b0304fef8da8a584f9d46c6, type: 3}
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -747,7 +747,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9219dc3702dc41cab71fe55982c76ff8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _itemViewPrefab: {fileID: 5668386525893257234, guid: 214394428339d9a4a998d06d551c3ae9, type: 3}
+  _itemViewPrefab: {fileID: 5668386525893257234, guid: 77e2f673b263de649beeea4d463d807e, type: 3}
   _placeForItems: {fileID: 3179242014997898066}
 --- !u!1 &8541014822580928080
 GameObject:

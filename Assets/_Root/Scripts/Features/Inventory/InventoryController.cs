@@ -11,8 +11,8 @@ namespace Inventory
         private readonly ItemsRepository _repository;
         private readonly InventoryModel _model;
         private readonly InventoryView _view;
-
-
+        public InventoryView View => _view;
+        
         public InventoryController(
             [NotNull] Transform placeForUi,
             [NotNull] InventoryModel inventoryModel)

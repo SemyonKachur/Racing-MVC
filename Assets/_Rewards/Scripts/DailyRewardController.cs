@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Profile;
 using UnityEngine;
 
 internal class DailyRewardController : BaseController, IDisposable
@@ -68,8 +67,6 @@ internal class DailyRewardController : BaseController, IDisposable
 
     private void RefreshUi()
     {
-       // _dailyRewardView.GetRewardButton.interactable = _isGetDailyReward;
-
        if (_isGetDailyReward)
        {
            _dailyRewardView.TimerNewDailyReward.text = "It's time to get reward !";

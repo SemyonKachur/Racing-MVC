@@ -1517,7 +1517,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
-  _gameState: 2
+  _gameState: 3
   _animationType: 2
   _ease: 1
   _duration: 0.1
@@ -1695,6 +1695,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5660545872060543822}
   - component: {fileID: 6506296579413713210}
+  - component: {fileID: -4546932886029469596}
   m_Layer: 5
   m_Name: mainMenu
   m_TagString: Untagged
@@ -1754,6 +1755,21 @@ MonoBehaviour:
   ButtonShed: {fileID: 2337448217596309734}
   GoldCount: {fileID: 5560405076654519375}
   OilCount: {fileID: 3319193464356540922}
+--- !u!114 &-4546932886029469596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6015533690559672758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a1a62b5770ef844887828ac641e05c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _buttonClosePopup: {fileID: 0}
+  _duration: 0.3
+  _rect: {fileID: 5660545872060543822}
 --- !u!1 &6111651750671098208
 GameObject:
   m_ObjectHideFlags: 0

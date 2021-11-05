@@ -7,6 +7,7 @@ namespace Profile
         Start,
         Game,
         Shed,
-        Rewards
+        Rewards,
+        none
     }
 }
