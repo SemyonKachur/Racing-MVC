@@ -1,5 +1,6 @@
 ﻿public enum AnimationType
 {
     ChangeRotation,
-    ChangePosition
+    ChangePosition,
+    ChangeScale
 }

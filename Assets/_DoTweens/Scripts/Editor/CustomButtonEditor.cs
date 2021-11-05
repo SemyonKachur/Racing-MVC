@@ -20,6 +20,7 @@ public class CustomButtonEditor : ButtonEditor
         var changeButtonType = new PropertyField(serializedObject.FindProperty(CustomButton.ChangeButtonType));
         var curveEase = new PropertyField(serializedObject.FindProperty(CustomButton.CurveEase));
         var duration = new PropertyField(serializedObject.FindProperty(CustomButton.Duration));
+        var gameState = new PropertyField(serializedObject.FindProperty(CustomButton.GameState));
 
         var settingLabel = new Label("Setting Button");
 
@@ -27,6 +28,7 @@ public class CustomButtonEditor : ButtonEditor
         root.Add(changeButtonType);
         root.Add(curveEase);
         root.Add(duration);
+        root.Add(gameState);
 
         root.Add(new IMGUIContainer(OnInspectorGUI));
 

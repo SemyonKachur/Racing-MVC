@@ -2,7 +2,7 @@ namespace Profile
 {
     internal enum GameState
     {
-        None,
+        Quit,
         Settings,
         Start,
         Game,
