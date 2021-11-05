@@ -1,5 +1,4 @@
-﻿using System;
-using Tool;
+﻿using Tool;
 using Profile;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -11,7 +10,7 @@ namespace Ui
             private readonly ResourcePath _resourcePath = new ResourcePath("Prefabs/settingsMenu");
             private readonly ProfilePlayer _profilePlayer;
             private readonly SettingsView _view;
-            private PopUpView _popUpView;
+            private readonly PopUpView _popUpView;
 
         public SettingsController(Transform placeForUi, ProfilePlayer profilePlayer)
         {
@@ -35,7 +34,7 @@ namespace Ui
         private void Back()
         {
             var buttonBack = _view.ButtonBack.GetComponent<CustomButton>();
-            buttonBack._animationEnd += ChangeState;
+            buttonBack.AnimationEnd += ChangeState;
             buttonBack.ActivateAnimation();
         }
 

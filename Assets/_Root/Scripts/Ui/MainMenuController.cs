@@ -13,10 +13,8 @@ namespace Ui
         private readonly ResourcePath _resourcePath = new ResourcePath("Prefabs/mainMenu");
         private readonly ProfilePlayer _profilePlayer;
         private readonly MainMenuView _view;
-
-        private PopUpView _popUpView;
-        private UnityAdsService _unityAds;
-        private IAPService _iapService;
+        private readonly UnityAdsService _unityAds;
+        private readonly IAPService _iapService;
        
         public MainMenuController(Transform placeForUi, ProfilePlayer profilePlayer)
         {
@@ -27,8 +25,8 @@ namespace Ui
             _view.Init(StartGame, Settings, Reward, BuyItem, BuyOil, Shed, RewardsMenu, 
                 profilePlayer.Gold, 
                 profilePlayer.Oil);
-            _popUpView = _view.GetComponent<PopUpView>();
-            _popUpView.ShowPopup();
+            var popUpView = _view.GetComponent<PopUpView>();
+            popUpView.ShowPopup();
         }
 
         private MainMenuView LoadView(Transform placeForUi)
@@ -43,27 +41,27 @@ namespace Ui
         private void StartGame()
         {
             var button = _view.ButtonStart.gameObject.GetComponent<CustomButton>();
-            button._animationEnd += ChangeState;
+            button.AnimationEnd += ChangeState;
             button.ActivateAnimation();
         }
         
         private void Settings()
         {
             var button = _view.ButtonSettings.gameObject.GetComponent<CustomButton>();
-            button._animationEnd += ChangeState;
+            button.AnimationEnd += ChangeState;
             button.ActivateAnimation();
         }
          
         private void Shed()
         { 
             var button = _view.ButtonShed.gameObject.GetComponent<CustomButton>();
-            button._animationEnd += ChangeState;
+            button.AnimationEnd += ChangeState;
             button.ActivateAnimation();
         }
         private void RewardsMenu()
         {
             var button = _view.ButtonRewards.gameObject.GetComponent<CustomButton>();
-            button._animationEnd += ChangeState;
+            button.AnimationEnd += ChangeState;
             button.ActivateAnimation();
         }
     

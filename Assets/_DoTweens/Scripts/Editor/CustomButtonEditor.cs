@@ -3,45 +3,48 @@ using UnityEditor.UI;
 using UnityEditor.UIElements;
 using UnityEngine.UIElements;
 
-[CustomEditor(typeof(CustomButton))]
-public class CustomButtonEditor : ButtonEditor
+namespace _DoTweens.Scripts.Editor
 {
-    private SerializedProperty _interactableProperty;
-
-    protected override void OnEnable()
+    [CustomEditor(typeof(CustomButton))]
+    public class CustomButtonEditor : ButtonEditor
     {
-        _interactableProperty = serializedObject.FindProperty("m_Interactable");
-    }
+        private SerializedProperty _interactableProperty;
 
-    public override VisualElement CreateInspectorGUI()
-    {
-        var root = new VisualElement();
+        protected override void OnEnable()
+        {
+            _interactableProperty = serializedObject.FindProperty("m_Interactable");
+        }
 
-        var changeButtonType = new PropertyField(serializedObject.FindProperty(CustomButton.ChangeButtonType));
-        var curveEase = new PropertyField(serializedObject.FindProperty(CustomButton.CurveEase));
-        var duration = new PropertyField(serializedObject.FindProperty(CustomButton.Duration));
-        var gameState = new PropertyField(serializedObject.FindProperty(CustomButton.GameState));
+        public override VisualElement CreateInspectorGUI()
+        {
+            var root = new VisualElement();
 
-        var settingLabel = new Label("Setting Button");
+            var changeButtonType = new PropertyField(serializedObject.FindProperty(CustomButton.ChangeButtonType));
+            var curveEase = new PropertyField(serializedObject.FindProperty(CustomButton.CurveEase));
+            var duration = new PropertyField(serializedObject.FindProperty(CustomButton.Duration));
+            var gameState = new PropertyField(serializedObject.FindProperty(CustomButton.GameState));
 
-        root.Add(settingLabel);
-        root.Add(changeButtonType);
-        root.Add(curveEase);
-        root.Add(duration);
-        root.Add(gameState);
+            var settingLabel = new Label("Setting Button");
 
-        root.Add(new IMGUIContainer(OnInspectorGUI));
+            root.Add(settingLabel);
+            root.Add(changeButtonType);
+            root.Add(curveEase);
+            root.Add(duration);
+            root.Add(gameState);
 
-        return root;
-    }
+            root.Add(new IMGUIContainer(OnInspectorGUI));
 
-    public override void OnInspectorGUI()
-    {
-        serializedObject.Update();
+            return root;
+        }
 
-        EditorGUILayout.PropertyField(_interactableProperty);
-        EditorGUI.BeginChangeCheck();
+        public override void OnInspectorGUI()
+        {
+            serializedObject.Update();
 
-        serializedObject.ApplyModifiedProperties();
+            EditorGUILayout.PropertyField(_interactableProperty);
+            EditorGUI.BeginChangeCheck();
+
+            serializedObject.ApplyModifiedProperties();
+        }
     }
 }

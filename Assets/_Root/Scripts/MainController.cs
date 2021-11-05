@@ -13,7 +13,7 @@ internal class MainController : BaseController
     private MainMenuController _mainMenuController;
     private ShedController _shedController;
     private GameController _gameController;
-    private SettingsController _setingsController;
+    private SettingsController _settingsController;
     private AbilitiesController _abilitiesController;
     private RewardsController _rewardsController;
     
@@ -48,14 +48,14 @@ internal class MainController : BaseController
             case GameState.Game:
                 DisposeControllers();
                 _gameController = new GameController(_profilePlayer);
-                _abilitiesController = new AbilitiesController(_gameController._transport,
+                _abilitiesController = new AbilitiesController(_gameController.Transport,
                     _profilePlayer.Abilities,
                     _profilePlayer.Abilities,
                     _placeForUi);
                 break;
             case GameState.Settings:
                 DisposeControllers();
-                _setingsController = new SettingsController(_placeForUi,_profilePlayer);
+                _settingsController = new SettingsController(_placeForUi,_profilePlayer);
                 break;
             case GameState.Shed:
                 DisposeControllers();
@@ -78,7 +78,7 @@ internal class MainController : BaseController
     {
         _mainMenuController?.Dispose();
         _gameController?.Dispose();
-        _setingsController?.Dispose();
+        _settingsController?.Dispose();
         _shedController?.Dispose();
         _abilitiesController?.Dispose();
         _rewardsController?.Dispose();

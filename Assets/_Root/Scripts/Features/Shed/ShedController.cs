@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using Configs.Shed;
 using Inventory;
-using JetBrains.Annotations;
 using Profile;
 using Tool;
 using UnityEngine;
@@ -17,7 +16,7 @@ namespace Shed
         private readonly UpgradeHandlersRepository _upgradeHandlersRepository;
         private readonly InventoryController _inventoryController;
         private readonly ShedView _view;
-        private PopUpView _popUpView;
+        private readonly PopUpView _popUpView;
 
 
         public ShedController(
@@ -34,14 +33,14 @@ namespace Shed
             _upgradeHandlersRepository = new UpgradeHandlersRepository(upgradeItemConfigs);
             AddRepository(_upgradeHandlersRepository);
 
-            _inventoryController = new InventoryController(placeForUi, _profilePlayer.Inventory);
-            AddController(_inventoryController);
+            var inventoryController = new InventoryController(placeForUi, _profilePlayer.Inventory);
+            AddController(inventoryController);
 
             _view = LoadView(placeForUi);
             _view.Init(Apply, Back);
 
             _popUpView = _view.gameObject.GetComponent<PopUpView>();
-            _popUpView._rect = _inventoryController.View.gameObject.GetComponent<RectTransform>();
+            _popUpView._rect = inventoryController.View.gameObject.GetComponent<RectTransform>();
             _popUpView.ShowPopup();
         }
 
@@ -57,7 +56,7 @@ namespace Shed
         private void Apply()
         {
             var button = _view.ButtonApply.gameObject.GetComponent<CustomButton>();
-            button._animationEnd += ChangeState;
+            button.AnimationEnd += ChangeState;
             button.ActivateAnimation();
         }
         
