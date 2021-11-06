@@ -1,12 +1,13 @@
 using Tool;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Game.TapeBackground
 {
     internal class TapeBackgroundView : MonoBehaviour
     {
         [SerializeField] private Background[] _backgrounds;
-
+        
         private ISubscriptionProperty<float> _diff;
 
         public void Init(ISubscriptionProperty<float> diff)

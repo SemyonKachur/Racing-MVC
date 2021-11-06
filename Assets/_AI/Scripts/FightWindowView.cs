@@ -59,7 +59,7 @@ public class FightWindowView : MonoBehaviour
     private int _allCountHealthPlayer;
     private int _allCountPowerPlayer;
 
-    private void Start()
+    public void Init()
     {
         _enemy = new Enemy("Flappy");
 

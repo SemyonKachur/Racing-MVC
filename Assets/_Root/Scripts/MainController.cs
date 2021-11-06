@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using AI;
 using Configs.Shed;
 using Features.Abilities;
 using Ui;
@@ -16,6 +17,8 @@ internal class MainController : BaseController
     private SettingsController _settingsController;
     private AbilitiesController _abilitiesController;
     private RewardsController _rewardsController;
+    private PlayerUIController _playerUIController;
+    private FightController _fightController;
     
     private readonly Transform _placeForUi;
     private readonly ProfilePlayer _profilePlayer;
@@ -52,6 +55,11 @@ internal class MainController : BaseController
                     _profilePlayer.Abilities,
                     _profilePlayer.Abilities,
                     _placeForUi);
+                _playerUIController = new PlayerUIController(_profilePlayer, _placeForUi);
+                break;
+            case GameState.Fight:
+                DisposeControllers();
+                _fightController = new FightController(_profilePlayer, _placeForUi);
                 break;
             case GameState.Settings:
                 DisposeControllers();
@@ -82,5 +90,7 @@ internal class MainController : BaseController
         _shedController?.Dispose();
         _abilitiesController?.Dispose();
         _rewardsController?.Dispose();
+        _playerUIController?.Dispose();
+        _fightController?.Dispose();
     }
 }

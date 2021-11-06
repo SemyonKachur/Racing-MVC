@@ -236,10 +236,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
-  _gameState: 2
-  _animationType: 2
-  _ease: 1
-  _duration: 0.2
+  gameState: 2
+  animationType: 2
+  ease: 1
+  duration: 0.2
 --- !u!1 &4479196594265446571
 GameObject:
   m_ObjectHideFlags: 0
@@ -322,10 +322,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
-  _gameState: 2
-  _animationType: 2
-  _ease: 1
-  _duration: 0.2
+  gameState: 2
+  animationType: 2
+  ease: 1
+  duration: 0.2
 --- !u!1 &5625735510443103482
 GameObject:
   m_ObjectHideFlags: 0

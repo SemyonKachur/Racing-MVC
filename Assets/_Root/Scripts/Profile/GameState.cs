@@ -8,6 +8,7 @@ namespace Profile
         Game,
         Shed,
         Rewards,
+        Fight,
         none
     }
 }
