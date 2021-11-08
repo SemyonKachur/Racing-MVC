@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Enemy : IEnemy
+internal class Enemy : IEnemy
 {
     private string _name;
 
