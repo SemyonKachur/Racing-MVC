@@ -12,7 +12,7 @@ namespace Game.Boat
 
         public GameObject ViewGameObject => _view.gameObject;
 
-        public BoatController() : base(TransportType.Boat)
+        public BoatController() 
         {
             _view = LoadView();
         }

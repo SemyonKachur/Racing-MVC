@@ -6,20 +6,20 @@ namespace Shed
 {
     internal class ShedView : MonoBehaviour
     {
-        [SerializeField] private Button _buttonApply;
-        [SerializeField] private Button _buttonBack;
+        [field: SerializeField] public Button ButtonApply;
+        [field: SerializeField] public Button ButtonBack;
 
 
         public void Init(UnityAction apply, UnityAction back)
         {
-            _buttonApply.onClick.AddListener(apply);
-            _buttonBack.onClick.AddListener(back);
+            ButtonApply.onClick.AddListener(apply);
+            ButtonBack.onClick.AddListener(back);
         }
 
         private void OnDestroy()
         {
-            _buttonApply.onClick.RemoveAllListeners();
-            _buttonBack.onClick.RemoveAllListeners();
+            ButtonApply.onClick.RemoveAllListeners();
+            ButtonBack.onClick.RemoveAllListeners();
         }
     }
 }

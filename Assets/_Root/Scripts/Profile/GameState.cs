@@ -2,11 +2,12 @@ namespace Profile
 {
     internal enum GameState
     {
-        None,
+        Quit,
         Settings,
         Start,
         Game,
         Shed,
-        Rewards
+        Rewards,
+        none
     }
 }

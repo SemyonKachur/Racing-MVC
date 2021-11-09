@@ -65,6 +65,10 @@ internal class MainController : BaseController
                 DisposeControllers();
                 _rewardsController = new RewardsController(_placeForUi,_profilePlayer);
                 break;
+            case GameState.Quit:
+                DisposeControllers();
+                Application.Quit();
+                break;
             default:
                 DisposeControllers();
                 break;

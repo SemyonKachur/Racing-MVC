@@ -6,7 +6,8 @@ using UnityEngine.UI;
 
 public class DailyRewardView : MonoBehaviour
 {
-    private const string CurrentSlotInActiveKey = nameof(CurrentSlotInActiveKey);
+    private const string DailyCurrentSlotInActiveKey = nameof(DailyCurrentSlotInActiveKey);
+    private const string WeeeklyCurrentSlotInActiveKey = nameof(WeeeklyCurrentSlotInActiveKey);
     private const string TimeGetRewardKey = nameof(TimeGetRewardKey);
     [Header("Timers")]
     [field: SerializeField] public float TimeCooldown = 86400;
@@ -32,13 +33,13 @@ public class DailyRewardView : MonoBehaviour
     
     public int CurrentDailySlotInActive
     {
-        get => PlayerPrefs.GetInt(CurrentSlotInActiveKey, 0);
-        set => PlayerPrefs.SetInt(CurrentSlotInActiveKey, value);
+        get => PlayerPrefs.GetInt(DailyCurrentSlotInActiveKey, 0);
+        set => PlayerPrefs.SetInt(DailyCurrentSlotInActiveKey, value);
     }
     public int CurrentWeeklySlotInActive
     {
-        get => PlayerPrefs.GetInt(CurrentSlotInActiveKey, 0);
-        set => PlayerPrefs.SetInt(CurrentSlotInActiveKey, value);
+        get => PlayerPrefs.GetInt(WeeeklyCurrentSlotInActiveKey, 0);
+        set => PlayerPrefs.SetInt(WeeeklyCurrentSlotInActiveKey, value);
     }
 
     public DateTime? TimeGetReward
