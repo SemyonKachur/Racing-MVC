@@ -33,6 +33,8 @@ internal class FightWindowView : MonoBehaviour
     [Header("Fighters")] 
     [field: SerializeField] public Image Player;
     [field: SerializeField] public Image Enemy;
+    [field: SerializeField] public Image Winner;
+    [field: SerializeField] public Image Looser;
 
 
     public void Init(
@@ -42,7 +44,6 @@ internal class FightWindowView : MonoBehaviour
         UnityAction fight, 
         UnityAction skipFight)
     {
-
         AddMoneyButton.onClick.AddListener(() => changeMoney(true));
         MinusMoneyButton.onClick.AddListener(() => changeMoney(false));
 
@@ -54,5 +55,8 @@ internal class FightWindowView : MonoBehaviour
 
         FightButton.onClick.AddListener(fight);
         SkipFight.onClick.AddListener(skipFight);
+        
+        Winner.gameObject.SetActive(false);
+        Looser.gameObject.SetActive(false);
     }
 }

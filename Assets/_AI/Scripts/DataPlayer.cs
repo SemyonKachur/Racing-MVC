@@ -1,7 +1,14 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
-public class DataPlayer
+internal class DataPlayer
 {
+    private const string WoodKey = nameof(WoodKey);
+    private const string DiamondKey = nameof(DiamondKey);
+    private const string HealthKey = nameof(HealthKey);
+    private const string PowerKey = nameof(PowerKey);
+    private const string MoneyKey = nameof(MoneyKey);
+    
     private string _titleData;
 
     private int _countMoney;
@@ -10,21 +17,21 @@ public class DataPlayer
 
     private List<IEnemy> _enemies = new List<IEnemy>();
 
-    public DataPlayer(string titleData)
+    public DataPlayer()
     {
-        _titleData = titleData;
+        
     }
 
     public string TitleData => _titleData;
 
     public int CountMoney 
     { 
-        get => _countMoney;
+        get => PlayerPrefs.GetInt(MoneyKey);
         set
         {
-            if (_countMoney != value)
+            if (PlayerPrefs.GetInt(MoneyKey) != value)
             {
-                _countMoney = value;
+                PlayerPrefs.SetInt(MoneyKey,value);
                 Notifier(DataType.Money);
             }
         }
@@ -32,12 +39,12 @@ public class DataPlayer
 
     public int CountHealth
     {
-        get => _countHealth;
+        get => PlayerPrefs.GetInt(HealthKey);
         set
         {
-            if (_countHealth != value)
+            if (PlayerPrefs.GetInt(HealthKey) != value)
             {
-                _countHealth = value;
+                PlayerPrefs.SetInt(HealthKey, value);
                 Notifier(DataType.Health);
             }
         }
@@ -45,12 +52,12 @@ public class DataPlayer
 
     public int CountPower
     {
-        get => _countPower;
+        get => PlayerPrefs.GetInt(PowerKey);
         set
         {
-            if (_countPower != value)
+            if (PlayerPrefs.GetInt(PowerKey) != value)
             {
-                _countPower = value;
+                PlayerPrefs.SetInt(PowerKey, value);
                 Notifier(DataType.Power);
             }
         }
@@ -69,27 +76,28 @@ public class DataPlayer
     private void Notifier(DataType dataType)
     {
         foreach(var enemy in _enemies)
-            enemy.Update(this, dataType);
+            enemy.Update(this);
     }
 }
 
-public class Money : DataPlayer
+internal class Money : DataPlayer
 {
-    public Money(string titleData) : base(titleData)
+    public Money(string titleData)
+    {
+        
+    }
+}
+
+internal class Health : DataPlayer
+{
+    public Health(string titleData)
     {
     }
 }
 
-public class Health : DataPlayer
+internal class Power : DataPlayer
 {
-    public Health(string titleData) : base(titleData)
-    {
-    }
-}
-
-public class Power : DataPlayer
-{
-    public Power(string titleData) : base(titleData)
+    public Power(string titleData)
     {
     }
 }

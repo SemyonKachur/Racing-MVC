@@ -3,19 +3,15 @@
     internal class FightModel
     {
         public Enemy Enemy { get; private set; }
-
+        public DataPlayer DataPlayer { get; private set; }
         public Money Money { get; private set; }
         public Health Health { get; private set; } 
         public Power Power { get; private set; }
-        
-        public int AllCountMoneyPlayer { get; private set; }
-        public int AllCountHealthPlayer { get; private set; } 
-        public int AllCountPowerPlayer { get; private set; }
 
         public FightModel()
         {
             Enemy = new Enemy("Flappy");
-
+            
             Money = new Money(nameof(Money));
             Money.Attach(Enemy);
 
@@ -24,30 +20,33 @@
 
             Power = new Power(nameof(Power));
             Power.Attach(Enemy);
+
+            DataPlayer = new DataPlayer();
         }
         
         public void ChangePower(bool isAddCount)
         {
             if (isAddCount)
-                AllCountPowerPlayer++;
+                Power.CountPower++;
             else
-                AllCountPowerPlayer--;
+                Power.CountPower--;
         }
 
         public void ChangeHealth(bool isAddCount)
         {
             if (isAddCount)
-                AllCountHealthPlayer++;
+                Health.CountHealth++;
             else
-                AllCountHealthPlayer--;
+                Health.CountHealth--;
         }
 
         public void ChangeMoney(bool isAddCount)
         {
             if (isAddCount)
-                AllCountMoneyPlayer++;
+                Money.CountMoney++; 
             else
-                AllCountMoneyPlayer--;
+                Money.CountMoney--;
+                
         }
     }
     
