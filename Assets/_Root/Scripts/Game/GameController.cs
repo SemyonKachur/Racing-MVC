@@ -1,6 +1,3 @@
-using Features.Abilities;
-using Game.Boat;
-using Game.Car;
 using Game.InputLogic;
 using Game.TapeBackground;
 using Game.Transport;
@@ -12,13 +9,13 @@ namespace Game
 {
     internal class GameController : BaseController
     {
-        private AnalyticsManager Analytics = AnalyticsManager.GetAnalytics();
-        public TransportController _transport { get; }
-        private ProfilePlayer _profilePlayer;
+        private readonly AnalyticsManager _analytics = AnalyticsManager.GetAnalytics();
+        public TransportController Transport { get; }
+        private readonly ProfilePlayer _profilePlayer;
         public GameController(ProfilePlayer profilePlayer)
         {
             _profilePlayer = profilePlayer;
-            Analytics.GameStarted();
+            _analytics.GameStarted();
             var leftMoveDiff = new SubscriptionProperty<float>();
             var rightMoveDiff = new SubscriptionProperty<float>();
 
@@ -28,7 +25,7 @@ namespace Game
             var inputGameController = new InputGameController(leftMoveDiff, rightMoveDiff, profilePlayer.CurrentTransport);
             AddController(inputGameController);
             
-            _transport = CreateController();
+            Transport = CreateController();
         }
 
         private TransportController CreateController()

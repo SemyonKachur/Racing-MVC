@@ -90,10 +90,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
-  _gameState: 2
-  _animationType: 2
-  _ease: 1
-  _duration: 0.1
+  gameState: 2
+  animationType: 2
+  ease: 1
+  duration: 0.2
 --- !u!114 &3792947353141084416
 MonoBehaviour:
   m_ObjectHideFlags: 0

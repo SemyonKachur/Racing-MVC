@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Enemy : IEnemy
+internal class Enemy : IEnemy
 {
     private string _name;
 
@@ -13,26 +13,12 @@ public class Enemy : IEnemy
         _name = name;
     }
 
-    public void Update(DataPlayer dataPlayer, DataType dataType)
+    public void Update(DataPlayer dataPlayer)
     {
-        switch (dataType)
-        {
-            case DataType.Health:
-                _healthPlayer = dataPlayer.CountHealth;
-                break;
-
-            case DataType.Money:
-                _moneyPlayer = dataPlayer.CountMoney;
-                break;
-
-            case DataType.Power:
-                _powerPlayer = dataPlayer.CountPower;
-                break;
-        }
-
-        Debug.Log($"Update {_name}, change {dataType}");
+      _healthPlayer = dataPlayer.CountHealth;
+      _moneyPlayer = dataPlayer.CountMoney;
+      _powerPlayer = dataPlayer.CountPower;
     }
-
     public int Power
     {
         get

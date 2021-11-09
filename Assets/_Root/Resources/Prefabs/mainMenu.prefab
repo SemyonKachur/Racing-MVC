@@ -536,10 +536,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
-  _gameState: 1
-  _animationType: 2
-  _ease: 1
-  _duration: 0.1
+  gameState: 1
+  animationType: 2
+  ease: 1
+  duration: 0.2
 --- !u!114 &3792947353141084416
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -691,10 +691,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
-  _gameState: 5
-  _animationType: 2
-  _ease: 1
-  _duration: 0.1
+  gameState: 5
+  animationType: 2
+  ease: 1
+  duration: 0.2
 --- !u!1 &3126755393936883717
 GameObject:
   m_ObjectHideFlags: 0
@@ -920,10 +920,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
-  _gameState: 4
-  _animationType: 2
-  _ease: 1
-  _duration: 0.1
+  gameState: 4
+  animationType: 2
+  ease: 1
+  duration: 0.2
 --- !u!114 &7200550096172264545
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1045,10 +1045,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
-  _gameState: 0
-  _animationType: 2
-  _ease: 1
-  _duration: 0.5
+  gameState: 0
+  animationType: 2
+  ease: 1
+  duration: 0.2
 --- !u!114 &7949973623320771443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1517,10 +1517,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
-  _gameState: 3
-  _animationType: 2
-  _ease: 1
-  _duration: 0.1
+  gameState: 3
+  animationType: 2
+  ease: 1
+  duration: 0.2
 --- !u!114 &6629910652529530908
 MonoBehaviour:
   m_ObjectHideFlags: 0

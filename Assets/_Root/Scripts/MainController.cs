@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using AI;
 using Configs.Shed;
 using Features.Abilities;
 using Ui;
@@ -13,9 +14,11 @@ internal class MainController : BaseController
     private MainMenuController _mainMenuController;
     private ShedController _shedController;
     private GameController _gameController;
-    private SettingsController _setingsController;
+    private SettingsController _settingsController;
     private AbilitiesController _abilitiesController;
     private RewardsController _rewardsController;
+    private PlayerUIController _playerUIController;
+    private FightController _fightController;
     
     private readonly Transform _placeForUi;
     private readonly ProfilePlayer _profilePlayer;
@@ -48,14 +51,19 @@ internal class MainController : BaseController
             case GameState.Game:
                 DisposeControllers();
                 _gameController = new GameController(_profilePlayer);
-                _abilitiesController = new AbilitiesController(_gameController._transport,
+                _abilitiesController = new AbilitiesController(_gameController.Transport,
                     _profilePlayer.Abilities,
                     _profilePlayer.Abilities,
                     _placeForUi);
+                _playerUIController = new PlayerUIController(_profilePlayer, _placeForUi);
+                break;
+            case GameState.Fight:
+                DisposeControllers();
+                _fightController = new FightController(_profilePlayer, _placeForUi);
                 break;
             case GameState.Settings:
                 DisposeControllers();
-                _setingsController = new SettingsController(_placeForUi,_profilePlayer);
+                _settingsController = new SettingsController(_placeForUi,_profilePlayer);
                 break;
             case GameState.Shed:
                 DisposeControllers();
@@ -78,9 +86,11 @@ internal class MainController : BaseController
     {
         _mainMenuController?.Dispose();
         _gameController?.Dispose();
-        _setingsController?.Dispose();
+        _settingsController?.Dispose();
         _shedController?.Dispose();
         _abilitiesController?.Dispose();
         _rewardsController?.Dispose();
+        _playerUIController?.Dispose();
+        _fightController?.Dispose();
     }
 }

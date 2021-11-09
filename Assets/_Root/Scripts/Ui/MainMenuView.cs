@@ -11,7 +11,7 @@ namespace Ui
         [field:SerializeField] public Button ButtonRewardedAds;
         [field:SerializeField] public Button ButtonForBuyingGold;
         [field:SerializeField] public Button ButtonForBuyingOil;
-        [field: SerializeField] public Button ButtonRewards;
+        [field:SerializeField] public Button ButtonRewards;
         [field:SerializeField] public Button ButtonShed;
         [field:SerializeField] public Text GoldCount;
         [field:SerializeField] public Text OilCount;

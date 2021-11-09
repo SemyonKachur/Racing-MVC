@@ -41,7 +41,7 @@ namespace Rewards
         private void Back()
         {
             var buttonBack = _rewardView.BackButton.GetComponent<CustomButton>();
-            buttonBack._animationEnd += ChangeState;
+            buttonBack.AnimationEnd += ChangeState;
             buttonBack.ActivateAnimation();
         }
 

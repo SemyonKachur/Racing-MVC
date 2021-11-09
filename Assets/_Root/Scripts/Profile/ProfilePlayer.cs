@@ -13,6 +13,7 @@ namespace Profile
         [field: SerializeField] public TransportModel CurrentTransport;
         [field: SerializeField] public InventoryModel Inventory;
         [field: SerializeField] public AbilitiesModel Abilities;
+        [field: SerializeField] public DataPlayer DataPlayer;
         [field: SerializeField] public int Gold;
         [field: SerializeField] public int Oil;
 

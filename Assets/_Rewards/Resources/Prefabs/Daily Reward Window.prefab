@@ -982,10 +982,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
-  _gameState: 6
-  _animationType: 2
-  _ease: 1
-  _duration: 0.1
+  gameState: 7
+  animationType: 2
+  ease: 1
+  duration: 0.2
 --- !u!1 &3321201636099543815
 GameObject:
   m_ObjectHideFlags: 0
@@ -1107,10 +1107,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
-  _gameState: 6
-  _animationType: 2
-  _ease: 1
-  _duration: 0.1
+  gameState: 7
+  animationType: 2
+  ease: 1
+  duration: 0.2
 --- !u!1 &3321201636188872391
 GameObject:
   m_ObjectHideFlags: 0
@@ -2383,10 +2383,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
-  _gameState: 2
-  _animationType: 2
-  _ease: 1
-  _duration: 0.1
+  gameState: 2
+  animationType: 2
+  ease: 1
+  duration: 0.2
 --- !u!1 &8085169583604822606
 GameObject:
   m_ObjectHideFlags: 0
