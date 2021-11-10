@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using AI;
+using AssetBundles;
 using Configs.Shed;
 using Features.Abilities;
 using Ui;
@@ -8,6 +9,7 @@ using Profile;
 using Rewards;
 using Shed;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 internal class MainController : BaseController
 {
@@ -19,16 +21,19 @@ internal class MainController : BaseController
     private RewardsController _rewardsController;
     private PlayerUIController _playerUIController;
     private FightController _fightController;
+    private LoadFightWindowView _fightWindowView;
+    private AssetReference _reference;
     
     private readonly Transform _placeForUi;
     private readonly ProfilePlayer _profilePlayer;
     private readonly IReadOnlyList<UpgradeItemConfig> _upgradeItemConfigs;
 
 
-    public MainController(Transform placeForUi, ProfilePlayer profilePlayer, IReadOnlyList<UpgradeItemConfig> upgradeItemConfigs)
+    public MainController(Transform placeForUi, ProfilePlayer profilePlayer, IReadOnlyList<UpgradeItemConfig> upgradeItemConfigs, AssetReference reference)
     {
         _profilePlayer = profilePlayer;
         _placeForUi = placeForUi;
+        _reference = reference;
         _upgradeItemConfigs = upgradeItemConfigs;
         OnChangeGameState(_profilePlayer.CurrentState.Value);
         profilePlayer.CurrentState.SubscribeOnChange(OnChangeGameState);
@@ -59,7 +64,7 @@ internal class MainController : BaseController
                 break;
             case GameState.Fight:
                 DisposeControllers();
-                _fightController = new FightController(_profilePlayer, _placeForUi);
+                _fightController = new FightController(_profilePlayer, _placeForUi, _reference);
                 break;
             case GameState.Settings:
                 DisposeControllers();

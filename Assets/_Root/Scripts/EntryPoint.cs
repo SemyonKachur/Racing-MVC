@@ -1,3 +1,4 @@
+using AssetBundles;
 using Configs;
 using Config;
 using Configs.Shed;
@@ -18,6 +19,7 @@ internal class EntryPoint : MonoBehaviour
     [SerializeField] private InventoryModelConfig inventoryModelConfig;
     [SerializeField] private UpgradeItemConfigDataSource upgradeItemConfigDataSource;
     [SerializeField] private AbilitiesModelConfig abilitiesModelConfig;
+    [SerializeField] private LoadFightWindowView _fightWindowView;
     
     [Header("Cpmponents")]
     [SerializeField] private Transform placeForUi;
@@ -34,7 +36,7 @@ internal class EntryPoint : MonoBehaviour
         var profilePlayer = new ProfilePlayer(playerStats.TransportSpeed,playerStats.TransportType,playerStats.GameState, playerStats.Gold,playerStats.Oil);
         InitializeInventoryModel(inventoryModelConfig, profilePlayer.Inventory);
         InitializeAbilitiesModel(abilitiesModelConfig, profilePlayer.Abilities);
-        _mainController = new MainController(placeForUi, profilePlayer,upgradeItemConfigDataSource.ItemConfigs);
+        _mainController = new MainController(placeForUi, profilePlayer,upgradeItemConfigDataSource.ItemConfigs,_fightWindowView.LoadPrefab);
         
         _analytics = new AnalyticsManager();
         _analytics.SendMainMenuOpened();

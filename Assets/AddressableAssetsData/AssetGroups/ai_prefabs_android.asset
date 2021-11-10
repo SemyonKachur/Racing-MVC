@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: ai_prefabs_android
+  m_EditorClassIdentifier: 
+  m_GroupName: ai_prefabs_android
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 479017bcd730c4e44959a77946191bd0
+  m_SerializeEntries: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 4c2d41b629ecdf548b59d0db5aaafb7b, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 093d2779091309a4bb647f5c2a7f1607, type: 2}
+    - {fileID: 11400000, guid: f2b20f08507dad7458d7168f81b6d447, type: 2}

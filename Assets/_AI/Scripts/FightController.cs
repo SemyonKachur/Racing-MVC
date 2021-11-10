@@ -1,7 +1,9 @@
-﻿using DoTweens;
+﻿using AssetBundles;
+using DoTweens;
 using Profile;
 using Tool;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace AI
 {
@@ -14,15 +16,23 @@ namespace AI
         private readonly FightWindowView _view;
         private readonly FightModel _fightModel;
         private readonly FightAnimations _fightAnimations;
+        private readonly AssetReference _reference;
+        private readonly LoadFightWindowView _fightWindowView;
+        
 
-        public FightController(ProfilePlayer profilePlayer, Transform placeForUI)
+        public FightController(ProfilePlayer profilePlayer, Transform placeForUI, AssetReference reference)
         {
             _profilePlayer = profilePlayer;
             _placeForUI = placeForUI;
-
+            _reference = reference;
             _fightModel = new FightModel();
 
-            _view = LoadView(_placeForUI);
+            _fightWindowView = new LoadFightWindowView(_placeForUI, _reference);
+            var go = _fightWindowView.GetGameObject();
+            var asd = go.Result;
+            _view = asd.GetComponent<FightWindowView>();
+            
+            // _view = LoadView(_placeForUI);
             _view.Init(ChangeMoney, ChangeHealth, ChangePower, Fight, SkipFight);
             RefreshDataUI();
 
