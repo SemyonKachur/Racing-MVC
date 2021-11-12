@@ -21,18 +21,16 @@ internal class MainController : BaseController
     private RewardsController _rewardsController;
     private PlayerUIController _playerUIController;
     private FightController _fightController;
-    private LoadFightWindowView _loadFightWindowView;
     
     private readonly Transform _placeForUi;
     private readonly ProfilePlayer _profilePlayer;
     private readonly IReadOnlyList<UpgradeItemConfig> _upgradeItemConfigs;
 
 
-    public MainController(Transform placeForUi, ProfilePlayer profilePlayer, IReadOnlyList<UpgradeItemConfig> upgradeItemConfigs, LoadFightWindowView loadFightWindowView)
+    public MainController(Transform placeForUi, ProfilePlayer profilePlayer, IReadOnlyList<UpgradeItemConfig> upgradeItemConfigs)
     {
         _profilePlayer = profilePlayer;
         _placeForUi = placeForUi;
-        _loadFightWindowView = loadFightWindowView;
         _upgradeItemConfigs = upgradeItemConfigs;
         OnChangeGameState(_profilePlayer.CurrentState.Value);
         profilePlayer.CurrentState.SubscribeOnChange(OnChangeGameState);
@@ -63,7 +61,7 @@ internal class MainController : BaseController
                 break;
             case GameState.Fight:
                 DisposeControllers();
-                _fightController = new FightController(_profilePlayer, _loadFightWindowView);
+                _fightController = new FightController(_profilePlayer);
                 break;
             case GameState.Settings:
                 DisposeControllers();
