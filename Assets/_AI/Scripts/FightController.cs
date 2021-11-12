@@ -14,11 +14,13 @@ namespace AI
         private FightWindowView _view;
         private FightAnimations _fightAnimations;
 
-        public FightController(ProfilePlayer profilePlayer)
+        public FightController(ProfilePlayer profilePlayer, LoadFightWindowView fightWindowView)
         {
             _profilePlayer = profilePlayer;
+            _fightWindowView = fightWindowView;
             _fightModel = new FightModel();
-            _fightWindowView = new LoadFightWindowView();
+            
+            _fightWindowView.GetGameObject();
             _fightWindowView.action += ViewInitialize;
         }
 
