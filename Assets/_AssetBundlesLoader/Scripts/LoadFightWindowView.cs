@@ -3,23 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.ResourceManagement.ResourceProviders;
 
 
 namespace AssetBundles
 {
-    internal class LoadFightWindowView: MonoBehaviour
+    internal class LoadFightWindowView
     {
-        [SerializeField] private Transform _placeForUI;
-        [SerializeField] private AssetReference _loadPrefab;
+        private Transform _placeForUI;
+        private InstantiationParameters _instantiationParameters;
+        private AssetReference _loadPrefab = new AssetReference("Assets/_AI/Fight Window View.prefab");
         private GameObject prefab { get; set; }
        
         private List<AsyncOperationHandle<GameObject>> _addressablePrefabs =
         new List<AsyncOperationHandle<GameObject>>();
         public event Action<GameObject> action;
         
-        public void GetGameObject()
+        public LoadFightWindowView(Transform placeForUI)
         {
-            var _addressablePrefab = Addressables.InstantiateAsync(_loadPrefab, _placeForUI);
+            _placeForUI = placeForUI;
+            var _addressablePrefab = Addressables.InstantiateAsync(_loadPrefab,_placeForUI);
             _addressablePrefabs.Add(_addressablePrefab);
             
             foreach (var addressablePrefabs in _addressablePrefabs)

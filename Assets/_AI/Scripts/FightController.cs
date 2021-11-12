@@ -10,17 +10,17 @@ namespace AI
         private readonly ProfilePlayer _profilePlayer;
         private readonly FightModel _fightModel;
         private readonly LoadFightWindowView _fightWindowView;
+        private readonly Transform _placeForUI;
         
         private FightWindowView _view;
         private FightAnimations _fightAnimations;
 
-        public FightController(ProfilePlayer profilePlayer, LoadFightWindowView fightWindowView)
+        public FightController(ProfilePlayer profilePlayer,Transform placeForUI)
         {
             _profilePlayer = profilePlayer;
-            _fightWindowView = fightWindowView;
+            _placeForUI = placeForUI;
             _fightModel = new FightModel();
-            
-            _fightWindowView.GetGameObject();
+            _fightWindowView = new LoadFightWindowView(_placeForUI);
             _fightWindowView.action += ViewInitialize;
         }
 
