@@ -1,52 +1,39 @@
 ﻿using AssetBundles;
 using DoTweens;
 using Profile;
-using Tool;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 
 namespace AI
 {
     internal class FightController : BaseController
     {
-        private ResourcePath _path = new ResourcePath("Prefabs/Fight Window View");
-        
         private readonly ProfilePlayer _profilePlayer;
-        private readonly Transform _placeForUI;
-        private readonly FightWindowView _view;
         private readonly FightModel _fightModel;
-        private readonly FightAnimations _fightAnimations;
-        private readonly AssetReference _reference;
         private readonly LoadFightWindowView _fightWindowView;
         
+        private FightWindowView _view;
+        private FightAnimations _fightAnimations;
 
-        public FightController(ProfilePlayer profilePlayer, Transform placeForUI, AssetReference reference)
+        public FightController(ProfilePlayer profilePlayer, LoadFightWindowView fightWindowView)
         {
             _profilePlayer = profilePlayer;
-            _placeForUI = placeForUI;
-            _reference = reference;
+            _fightWindowView = fightWindowView;
             _fightModel = new FightModel();
-
-            _fightWindowView = new LoadFightWindowView(_placeForUI, _reference);
-            var go = _fightWindowView.GetGameObject();
-            var asd = go.Result;
-            _view = asd.GetComponent<FightWindowView>();
             
-            // _view = LoadView(_placeForUI);
+            _fightWindowView.GetGameObject();
+            _fightWindowView.action += ViewInitialize;
+        }
+
+        private void ViewInitialize(GameObject gameObject)
+        {
+            AddGameObject(gameObject);
+            _view = gameObject.GetComponent<FightWindowView>();
+            
             _view.Init(ChangeMoney, ChangeHealth, ChangePower, Fight, SkipFight);
             RefreshDataUI();
 
             _fightAnimations = new FightAnimations(_view);
             _fightAnimations.Winner += VictoryAnimation;
-        }
-        
-        private FightWindowView LoadView(Transform placeForUi)
-        {
-            GameObject prefab = ResourcesLoader.LoadPrefab(_path);
-            GameObject objectView = Object.Instantiate(prefab, placeForUi, false);
-            AddGameObject(objectView);
-
-            return objectView.GetComponent<FightWindowView>();
         }
         
         private void SkipFight()
@@ -101,6 +88,11 @@ namespace AI
                 _view.SkipFight.gameObject.SetActive(true);
             else 
                 _view.SkipFight.gameObject.SetActive(false);
+        }
+
+        protected override void OnDispose()
+        {
+            _fightWindowView.action -= ViewInitialize;
         }
     }
 }

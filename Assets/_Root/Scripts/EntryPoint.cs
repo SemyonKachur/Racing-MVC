@@ -36,7 +36,7 @@ internal class EntryPoint : MonoBehaviour
         var profilePlayer = new ProfilePlayer(playerStats.TransportSpeed,playerStats.TransportType,playerStats.GameState, playerStats.Gold,playerStats.Oil);
         InitializeInventoryModel(inventoryModelConfig, profilePlayer.Inventory);
         InitializeAbilitiesModel(abilitiesModelConfig, profilePlayer.Abilities);
-        _mainController = new MainController(placeForUi, profilePlayer,upgradeItemConfigDataSource.ItemConfigs,_fightWindowView.LoadPrefab);
+        _mainController = new MainController(placeForUi, profilePlayer,upgradeItemConfigDataSource.ItemConfigs,_fightWindowView);
         
         _analytics = new AnalyticsManager();
         _analytics.SendMainMenuOpened();

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -8,36 +7,33 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace AssetBundles
 {
-    [Serializable]
-    internal class LoadFightWindowView
+    internal class LoadFightWindowView: MonoBehaviour
     {
-        private Transform _placeForUI;
-        [field: SerializeField] public AssetReference LoadPrefab;
-
+        [SerializeField] private Transform _placeForUI;
+        [SerializeField] private AssetReference _loadPrefab;
+        private GameObject prefab { get; set; }
+       
         private List<AsyncOperationHandle<GameObject>> _addressablePrefabs =
         new List<AsyncOperationHandle<GameObject>>();
+        public event Action<GameObject> action;
         
-        public LoadFightWindowView(Transform placeForUI, AssetReference prefab)
+        public void GetGameObject()
         {
-            _placeForUI = placeForUI;
-            LoadPrefab = prefab;
+            var _addressablePrefab = Addressables.InstantiateAsync(_loadPrefab, _placeForUI);
+            _addressablePrefabs.Add(_addressablePrefab);
             
-            var addressablePrefab = Addressables.InstantiateAsync(LoadPrefab, _placeForUI);
-            _addressablePrefabs.Add(addressablePrefab);
-        }
-
-        public async Task<GameObject> GetGameObject()
-        {
-            GameObject gameObjectPrefab = null;
-            foreach (var addressablePrefab in _addressablePrefabs)
+            foreach (var addressablePrefabs in _addressablePrefabs)
             {
-                await addressablePrefab.Task;
-                if (addressablePrefab.Status == AsyncOperationStatus.Succeeded)
-                {
-                    gameObjectPrefab = addressablePrefab.Result;
-                }
+                addressablePrefabs.Completed += Complete;
             }
-            return gameObjectPrefab;
+        }
+        private void Complete(AsyncOperationHandle<GameObject> obj)
+        {
+            if (obj.Status == AsyncOperationStatus.Succeeded)
+            {
+                prefab = obj.Result;
+                action?.Invoke(prefab);
+            }
         }
 
         private void OnDestroy()
